@@ -192,3 +192,24 @@ footer p { margin: 0; }
   font: 500 0.8rem "DM Mono", monospace;
   letter-spacing: 0.05em;
 }
+.about-content {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+}
+
+.about-photo {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid var(--ink);
+  flex-shrink: 0;
+}
+
+@media (max-width: 600px) {
+  .about-content {
+    flex-direction: column;
+    align-items: start;
+  }
+}
