@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mi lista de tareas · Mi espacio de aprendizaje</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="cursor-glow" aria-hidden="true"></div>
+    <div class="bg-scene" aria-hidden="true">
+      <div class="aura aura-hero" data-speed="0.12"></div>
+      <div class="aura aura-about" data-speed="-0.08"></div>
+    </div>
+
+    <main>
+      <nav id="nav">
+        <a class="logo" href="index.html#inicio">MI ESPACIO</a>
+        <a class="nav-link" href="index.html#proyectos">Volver a proyectos</a>
+      </nav>
+
+      <section class="tasks">
+        <p class="status-badge">Proyecto 02 · JavaScript</p>
+        <h2>Mi lista de tareas</h2>
+        <p class="intro" style="margin: 18px 0 32px;">
+          Añade tareas, márcalas como hechas y bórralas cuando ya no las necesites.
+          Todo se guarda en este navegador.
+        </p>
+
+        <form class="task-form" id="task-form">
+          <input
+            type="text"
+            id="task-input"
+            placeholder="Escribe una tarea nueva…"
+            autocomplete="off"
+          />
+          <button type="submit" class="button">Añadir <span>→</span></button>
+        </form>
+
+        <p class="task-count" id="task-count"></p>
+
+        <ul id="task-list"></ul>
+      </section>
+
+      <footer>
+        <p>Hecho paso a paso.</p>
+        <p id="year"></p>
+      </footer>
+    </main>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      const nav = document.getElementById("nav");
+      window.addEventListener("scroll", () => {
+        nav.classList.toggle("scrolled", window.scrollY > 8);
+      });
+
+      const auras = document.querySelectorAll(".aura");
+      let ticking = false;
+      function updateParallax() {
+        const y = window.scrollY;
+        auras.forEach((aura) => {
+          const speed = parseFloat(aura.dataset.speed);
+          aura.style.transform = `translateY(${y * speed}px)`;
+        });
+        ticking = false;
+      }
+      window.addEventListener("scroll", () => {
+        if (!ticking) {
+          requestAnimationFrame(updateParallax);
+          ticking = true;
+        }
+      });
+
+      const glow = document.getElementById("cursor-glow");
+      window.addEventListener("mousemove", (e) => {
+        glow.style.opacity = "1";
+        glow.style.left = e.clientX + "px";
+        glow.style.top = e.clientY + "px";
+      });
+      window.addEventListener("mouseleave", () => { glow.style.opacity = "0"; });
+
+      const STORAGE_KEY = "mario-tareas";
+      const form = document.getElementById("task-form");
+      const input = document.getElementById("task-input");
+      const list = document.getElementById("task-list");
+      const count = document.getElementById("task-count");
+
+      function loadTasks() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          return raw ? JSON.parse(raw) : [];
+        } catch (error) {
+          return [];
+        }
+      }
+
+      function saveTasks(tasks) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+      }
+
+      function updateCount(tasks) {
+        const pending = tasks.filter((task) => !task.completed).length;
+        if (tasks.length === 0) {
+          count.textContent = "Todavía no has añadido ninguna tarea.";
+        } else if (pending === 0) {
+          count.textContent = "Has completado todas tus tareas.";
+        } else {
+          count.textContent = `${pending} tarea${pending === 1 ? "" : "s"} pendiente${pending === 1 ? "" : "s"}`;
+        }
+      }
+
+      function render() {
+        const tasks = loadTasks();
+        list.innerHTML = "";
+
+        tasks.forEach((task) => {
+          const item = document.createElement("li");
+          item.textContent = task.text;
+          item.dataset.id = task.id;
+          if (task.completed) {
+            item.classList.add("completed");
+          }
+
+          item.addEventListener("click", () => toggleTask(task.id));
+
+          const deleteButton = document.createElement("span");
+          deleteButton.textContent = " ✕";
+          deleteButton.style.float = "right";
+          deleteButton.style.opacity = "0.6";
+          deleteButton.addEventListener("click", (event) => {
+            event.stopPropagation();
+            deleteTask(task.id);
+          });
+          item.appendChild(deleteButton);
+
+          list.appendChild(item);
+        });
+
+        updateCount(tasks);
+      }
+
+      function addTask(text) {
+        const tasks = loadTasks();
+        tasks.push({ id: Date.now().toString(), text, completed: false });
+        saveTasks(tasks);
+        render();
+      }
+
+      function toggleTask(id) {
+        const tasks = loadTasks().map((task) =>
+          task.id === id ? { ...task, completed: !task.completed } : task
+        );
+        saveTasks(tasks);
+        render();
+      }
+
+      function deleteTask(id) {
+        const tasks = loadTasks().filter((task) => task.id !== id);
+        saveTasks(tasks);
+        render();
+      }
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const text = input.value.trim();
+        if (text === "") return;
+        addTask(text);
+        input.value = "";
+        input.focus();
+      });
+
+      render();
+    </script>
+  </body>
+</html>
