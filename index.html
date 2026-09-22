@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mi espacio de aprendizaje</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="cursor-glow" aria-hidden="true"></div>
+    <main>
+      <div class="aura-hero" aria-hidden="true"></div>
+
+      <nav id="nav">
+        <a class="logo" href="#inicio">MI ESPACIO</a>
+        <div>
+          <a class="nav-link" href="#sobre-mi">Sobre mí</a>
+          <a class="nav-link" href="#proyectos">Proyectos</a>
+        </div>
+      </nav>
+
+      <section class="hero" id="inicio">
+        <p class="status-badge"><span class="dot"></span>En construcción, 2026</p>
+        <h1 class="scroll-fade">Hola, soy <span>Mario Iglesias.</span></h1>
+        <p class="intro scroll-fade">
+          Estoy aprendiendo programación web y edición de vídeo. Este es mi espacio para crear
+          proyectos y mejorar poco a poco, y para enseñar lo que voy construyendo.
+        </p>
+        <div class="push-area">
+          <button class="button" id="message-button">Dame un empujón <span>→</span></button>
+          <div id="confetti-host"></div>
+        </div>
+      </section>
+
+      <section class="about" id="sobre-mi">
+        <p class="status-badge reveal">Sobre mí</p>
+        <div class="about-content reveal">
+          <img src="fotoweb.png" alt="Foto de Mario Iglesias" class="about-photo" />
+          <div>
+            <h2 class="scroll-fade">Aprendo creando.</h2>
+            <p class="scroll-fade">
+              Estoy aprendiendo programación web y edición de vídeo. Quiero crear
+              proyectos reales, mejorar cada día y enseñar mi progreso aquí.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="projects" id="proyectos">
+        <div class="section-heading reveal">
+          <p class="status-badge">Mis primeros pasos</p>
+          <h2 class="scroll-fade">Proyectos</h2>
+        </div>
+
+        <article class="project-card first-project reveal tilt-card">
+          <div>
+            <p class="card-number">01</p>
+            <h3>Mi primera web</h3>
+            <p>
+              Una página personal creada con HTML y CSS. La estoy usando para
+              aprender a programar desde cero.
+            </p>
+          </div>
+          <p class="tag">HTML · CSS</p>
+        </article>
+
+        <article class="project-card task-project reveal tilt-card">
+          <div>
+            <p class="card-number">02</p>
+            <h3>Mi lista de tareas</h3>
+            <p>
+              Una aplicación que añade, guarda, completa y borra mis tareas.
+            </p>
+            <a class="button" href="tareas.html">Abrir la lista <span>→</span></a>
+          </div>
+          <p class="tag">JAVASCRIPT</p>
+        </article>
+
+        <article class="project-card reveal tilt-card">
+          <div>
+            <p class="card-number">03</p>
+            <h3>Aprender edición de vídeo</h3>
+            <p>Mi siguiente objetivo es crear y editar mi primer vídeo corto☺️.</p>
+          </div>
+          <p class="tag">EN PROCESO</p>
+        </article>
+
+        <article class="project-card reveal tilt-card">
+          <div>
+            <p class="card-number">04</p>
+            <h3>Mi currículum</h3>
+            <p>
+              Mi formación, mis habilidades y lo que he ido aprendiendo hasta ahora.
+            </p>
+            <ul class="skill-list" style="margin: 16px 0 4px;">
+              <li>Atención al cliente</li>
+              <li>Ayudante de cocina · 2024–2025</li>
+              <li>Inglés medio</li>
+              <li>HTML · CSS · JS</li>
+            </ul>
+            <a class="button" href="cv.html">Ver mi CV completo <span>→</span></a>
+          </div>
+          <p class="tag">CV</p>
+        </article>
+      </section>
+
+      <footer>
+        <p>Hecho paso a paso.</p>
+        <p id="year"></p>
+      </footer>
+    </main>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      const button = document.getElementById("message-button");
+      const confettiHost = document.getElementById("confetti-host");
+
+      function launchConfetti() {
+        confettiHost.innerHTML = "";
+        const count = 14;
+        for (let i = 0; i < count; i++) {
+          const piece = document.createElement("span");
+          piece.className = "confetti-piece";
+          const angle = Math.random() * Math.PI * 2;
+          const distance = 60 + Math.random() * 70;
+          piece.style.setProperty("--dx", `${Math.cos(angle) * distance}px`);
+          piece.style.setProperty("--dy", `${Math.sin(angle) * distance}px`);
+          piece.style.setProperty("--rot", `${(Math.random() - 0.5) * 360}deg`);
+          piece.style.left = `${20 + Math.random() * 60}px`;
+          confettiHost.appendChild(piece);
+          requestAnimationFrame(() => piece.classList.add("burst"));
+        }
+      }
+
+      button.addEventListener("click", () => {
+        launchConfetti();
+        setTimeout(() => {
+          window.open("https://www.instagram.com/Whsmario/", "_blank", "noopener");
+        }, 420);
+      });
+
+      const nav = document.getElementById("nav");
+      window.addEventListener("scroll", () => {
+        nav.classList.toggle("scrolled", window.scrollY > 8);
+      });
+
+      // Revelado 3D al hacer scroll (gira desde el eje X hasta quedar plano) — solo tarjetas y bloques que no llevan texto continuo
+      const revealTargets = document.querySelectorAll(".reveal");
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("in-view");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.15 }
+      );
+      revealTargets.forEach((el) => observer.observe(el));
+
+      // Desvanecido continuo: el texto aparece según se acerca al centro de la pantalla
+      // y se desvanece al alejarse hacia arriba o hacia abajo
+      const fadeTargets = document.querySelectorAll(".scroll-fade");
+      function updateScrollFade() {
+        const vh = window.innerHeight;
+        fadeTargets.forEach((el) => {
+          const rect = el.getBoundingClientRect();
+          const center = rect.top + rect.height / 2;
+          const distance = Math.abs(center - vh / 2);
+          const opacity = Math.max(1 - distance / (vh * 0.65), 0.08);
+          const offset = (center - vh / 2) * 0.06;
+          el.style.opacity = opacity;
+          el.style.transform = `translateY(${offset}px)`;
+        });
+      }
+
+      // Halo que sigue al cursor
+      const glow = document.getElementById("cursor-glow");
+      window.addEventListener("mousemove", (e) => {
+        glow.style.opacity = "1";
+        glow.style.left = e.clientX + "px";
+        glow.style.top = e.clientY + "px";
+      });
+      document.addEventListener("mouseleave", () => { glow.style.opacity = "0"; });
+
+      // Parallax suave del aura del hero
+      const aura = document.querySelector(".aura-hero");
+      let ticking = false;
+      function updateOnScroll() {
+        aura.style.transform = `translateY(${window.scrollY * 0.15}px)`;
+        updateScrollFade();
+        ticking = false;
+      }
+      window.addEventListener("scroll", () => {
+        if (!ticking) {
+          requestAnimationFrame(updateOnScroll);
+          ticking = true;
+        }
+      });
+      updateScrollFade();
+
+      // Inclinación 3D en las tarjetas al pasar el ratón
+      document.querySelectorAll(".tilt-card").forEach((card) => {
+        card.addEventListener("mousemove", (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = (e.clientX - rect.left) / rect.width - 0.5;
+          const y = (e.clientY - rect.top) / rect.height - 0.5;
+          card.style.transform = `perspective(900px) translateY(-4px) rotateX(${y * -6}deg) rotateY(${x * 8}deg)`;
+        });
+        card.addEventListener("mouseleave", () => {
+          card.style.transform = "perspective(900px) translateY(0) rotateX(0) rotateY(0)";
+        });
+      });
+    </script>
+  </body>
+</html>
