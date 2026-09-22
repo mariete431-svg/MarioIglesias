@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mi CV · Mi espacio de aprendizaje</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="cursor-glow" aria-hidden="true"></div>
+    <main>
+      <div class="aura-hero" aria-hidden="true"></div>
+
+      <nav id="nav">
+        <a class="logo" href="index.html#inicio">MI ESPACIO</a>
+        <a class="nav-link" href="index.html#proyectos">Volver a proyectos</a>
+      </nav>
+
+      <section class="hero" style="min-height: auto; padding: 60px 0 20px;">
+        <p class="status-badge"><span class="dot"></span>Proyecto 04 · CV</p>
+
+        <div class="cv-header">
+          <img src="fotoweb.png" alt="Foto de Mario Iglesias" />
+          <div>
+            <h2>Mario Iglesias Martínez</h2>
+            <p>Atención al cliente y trabajo administrativo · Aprendiendo programación web</p>
+          </div>
+        </div>
+
+        <div class="cv-actions">
+          <a class="button" href="cv-mario.pdf" download>Descargar en PDF <span>↓</span></a>
+          <a class="button" href="mailto:mariete431@icloud.com">Escribirme <span>→</span></a>
+        </div>
+      </section>
+
+      <section class="cv-section reveal">
+        <h3>Contacto</h3>
+        <ul class="skill-list">
+          <li>📍 Adeje, Santa Cruz de Tenerife</li>
+          <li>📞 <a href="tel:+34691886942" style="color: inherit;">691 886 942</a></li>
+          <li>✉️ <a href="mailto:mariete431@icloud.com" style="color: inherit;">mariete431@icloud.com</a></li>
+        </ul>
+      </section>
+
+      <section class="cv-section reveal">
+        <h3>Perfil</h3>
+        <p class="intro" style="max-width: 640px;">
+          Soy un chico trabajador, con ganas de aprender. Muy responsable y con ganas de seguir
+          aprendiendo. Tengo facilidad para trabajar en grupo, comunicarme y ser reactivo.
+          Profesional orientado a la atención al cliente y al trabajo administrativo básico, con
+          experiencia en trato directo con clientes, gestión de incidencias y trabajo bajo presión.
+          Buen manejo de herramientas digitales y alta capacidad de aprendizaje.
+        </p>
+      </section>
+
+      <section class="cv-section reveal">
+        <h3>Objetivos</h3>
+        <p class="intro" style="max-width: 640px;">
+          Enriquecerme profesionalmente en cualquier ámbito laboral. Crecer profesionalmente
+          y seguir aprendiendo.
+        </p>
+      </section>
+
+      <section class="cv-section reveal">
+        <h3>Formación académica</h3>
+        <ul class="timeline">
+          <li>
+            <span class="date">2025</span>
+            <h4>INSIDE LVMH Certificate</h4>
+            <p>Curso online de Operations &amp; Supply Chain, Retail &amp; Client Experience.</p>
+          </li>
+          <li>
+            <span class="date">Sep. 2015 – Jul. 2019</span>
+            <h4>Graduado en Educación Secundaria Obligatoria (ESO)</h4>
+            <p>IES María Guerrero, Collado Villalba.</p>
+          </li>
+        </ul>
+      </section>
+
+      <section class="cv-section reveal">
+        <h3>Experiencia laboral</h3>
+        <ul class="timeline">
+          <li>
+            <span class="date">Marzo 2024 – Diciembre 2025</span>
+            <h4>Ayudante de cocina</h4>
+            <p>Restaurante Marietta, Gourmetland. Adeje, Tenerife.</p>
+          </li>
+          <li>
+            <span class="date">Marzo 2023 – Octubre 2023</span>
+            <h4>Atención al cliente</h4>
+            <p>Gestión de cobros, pedidos y resolución de problemas. Centro de estética, Perfumerías Primor. Goya, Madrid.</p>
+          </li>
+          <li>
+            <span class="date">Marzo 2022 – Enero 2023</span>
+            <h4>Operario de restaurante</h4>
+            <p>Burger King, Collado Villalba, Madrid.</p>
+          </li>
+          <li>
+            <span class="date">Marzo 2018 – 2021</span>
+            <h4>Auxiliar en fiestas de cumpleaños</h4>
+          </li>
+          <li>
+            <span class="date">Abril 2019</span>
+            <h4>Ayudante en limpieza de portales y urbanizaciones</h4>
+            <p>Sersinor, Collado Villalba.</p>
+          </li>
+        </ul>
+      </section>
+
+      <section class="cv-section reveal">
+        <h3>Idiomas</h3>
+        <ul class="skill-list">
+          <li>Inglés — nivel medio, hablado y escrito</li>
+        </ul>
+      </section>
+
+      <section class="cv-section reveal">
+        <h3>Habilidades digitales</h3>
+        <ul class="skill-list">
+          <li>HTML</li>
+          <li>CSS</li>
+          <li>JavaScript</li>
+          <li>Git y GitHub</li>
+          <li>Edición de vídeo (en proceso)</li>
+        </ul>
+      </section>
+
+      <section class="cv-section reveal">
+        <h3>Otros datos de interés</h3>
+        <ul class="skill-list">
+          <li>Disponibilidad geográfica: España</li>
+          <li>Disponibilidad horaria: total</li>
+        </ul>
+      </section>
+
+      <footer>
+        <p>Hecho paso a paso.</p>
+        <p id="year"></p>
+      </footer>
+    </main>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      const nav = document.getElementById("nav");
+      window.addEventListener("scroll", () => {
+        nav.classList.toggle("scrolled", window.scrollY > 8);
+      });
+
+      const revealTargets = document.querySelectorAll(".reveal");
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("in-view");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+      revealTargets.forEach((el) => observer.observe(el));
+
+      const aura = document.querySelector(".aura-hero");
+      let ticking = false;
+      function updateParallax() {
+        aura.style.transform = `translateY(${window.scrollY * 0.15}px)`;
+        ticking = false;
+      }
+      window.addEventListener("scroll", () => {
+        if (!ticking) {
+          requestAnimationFrame(updateParallax);
+          ticking = true;
+        }
+      });
+
+      const glow = document.getElementById("cursor-glow");
+      window.addEventListener("mousemove", (e) => {
+        glow.style.opacity = "1";
+        glow.style.left = e.clientX + "px";
+        glow.style.top = e.clientY + "px";
+      });
+      document.addEventListener("mouseleave", () => { glow.style.opacity = "0"; });
+    </script>
+  </body>
+</html>
