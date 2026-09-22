@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mi espacio de aprendizaje</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav id="nav">
+      <div class="nav-inner">
+        <a class="logo" href="#inicio">MARIO IGLESIAS</a>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú"><span></span></button>
+        <div class="nav-links" id="nav-links">
+          <a class="nav-link" href="#inicio">Inicio</a>
+          <a class="nav-link" href="#sobre-mi">Sobre mí</a>
+          <a class="nav-link" href="#proyectos">Proyectos</a>
+          <a class="nav-link" href="#contacto">Contacto</a>
+          <a class="nav-link" href="cv.html">CV</a>
+          <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar tema">
+            <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+            <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+      <section class="hero" id="inicio">
+        <div class="hero-grid">
+          <div>
+            <p class="status-badge"><span class="dot"></span>En construcción, 2026</p>
+            <h1 class="reveal">Hola, soy <span>Mario Iglesias.</span></h1>
+            <p class="intro reveal">
+              Estoy aprendiendo programación web y edición de vídeo. Este es mi espacio para crear
+              proyectos y mejorar poco a poco, y para enseñar lo que voy construyendo.
+            </p>
+            <div class="button-row reveal">
+              <button class="button" id="message-button">Dame un empujón <span>→</span></button>
+              <a class="button button-outline" href="#proyectos">Ver proyectos</a>
+            </div>
+            <div id="confetti-host" style="position: relative;"></div>
+          </div>
+          <div class="hero-photo-wrap reveal" id="hero-photo-wrap">
+            <div class="hero-photo-frame"></div>
+            <img src="fotoweb.png" alt="Foto de Mario Iglesias" class="hero-photo" />
+          </div>
+        </div>
+      </section>
+
+      <section class="about" id="sobre-mi">
+        <div class="about-grid">
+          <img src="fotoweb.png" alt="Foto de Mario Iglesias" class="about-photo reveal" />
+          <div class="reveal">
+            <p class="status-badge">Sobre mí</p>
+            <h2>Aprendo creando.</h2>
+            <p>
+              Estoy aprendiendo programación web y edición de vídeo. Quiero crear
+              proyectos reales, mejorar cada día y enseñar mi progreso aquí.
+            </p>
+            <div class="about-tags">
+              <span>Atención al cliente</span>
+              <span>HTML · CSS · JS</span>
+              <span>Inglés medio</span>
+              <span>Adeje, Tenerife</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="projects" id="proyectos">
+        <div class="section-heading reveal">
+          <p class="status-badge">Mis primeros pasos</p>
+          <h2 class="section-title">Proyectos</h2>
+        </div>
+
+        <div class="card-grid">
+          <article class="project-card reveal tilt-card">
+            <span class="project-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            </span>
+            <h3>Mi primera web</h3>
+            <p>Una página personal creada con HTML y CSS, para aprender a programar desde cero.</p>
+            <div class="tech-tags"><span>HTML</span><span>CSS</span></div>
+            <a class="button" href="#inicio">Estás aquí <span>→</span></a>
+          </article>
+
+          <article class="project-card reveal tilt-card">
+            <span class="project-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+            </span>
+            <h3>Mi lista de tareas</h3>
+            <p>Una aplicación que añade, guarda, completa y borra mis tareas, guardadas en el navegador.</p>
+            <div class="tech-tags"><span>JavaScript</span></div>
+            <a class="button" href="tareas.html">Abrir la lista <span>→</span></a>
+          </article>
+
+          <article class="project-card reveal tilt-card">
+            <span class="project-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+            </span>
+            <h3>Aprender edición de vídeo</h3>
+            <p>Mi siguiente objetivo es crear y editar mi primer vídeo corto.</p>
+            <div class="tech-tags"><span>En proceso</span></div>
+          </article>
+
+          <article class="project-card reveal tilt-card">
+            <span class="project-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            </span>
+            <h3>Mi currículum</h3>
+            <p>Mi formación, mis habilidades y mi experiencia hasta ahora, organizado como portfolio.</p>
+            <div class="tech-tags"><span>Atención al cliente</span><span>Hostelería</span></div>
+            <a class="button" href="cv.html">Ver mi CV <span>→</span></a>
+          </article>
+        </div>
+      </section>
+
+      <section class="contact reveal" id="contacto">
+        <div class="contact-inner">
+          <p class="status-badge" style="justify-content: center; color: rgba(243,239,228,0.7);"><span class="dot"></span>Contacto</p>
+          <h2>¿Hablamos?</h2>
+          <p>Estoy abierto a nuevas oportunidades y a conocer gente con la que aprender. Escríbeme cuando quieras.</p>
+          <div class="button-row">
+            <a class="button" href="mailto:mariete431@icloud.com">Escribirme <span>→</span></a>
+            <a class="button button-outline" href="https://www.instagram.com/Whsmario/" target="_blank" rel="noopener">Instagram</a>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <p>Hecho paso a paso.</p>
+        <p id="year"></p>
+      </footer>
+    </main>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      // Modo claro / oscuro
+      const root = document.documentElement;
+      const themeToggle = document.getElementById("theme-toggle");
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme) root.setAttribute("data-theme", savedTheme);
+      themeToggle.addEventListener("click", () => {
+        const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+        root.setAttribute("data-theme", next);
+        localStorage.setItem("theme", next);
+      });
+
+      // Menú móvil
+      const navToggle = document.getElementById("nav-toggle");
+      const navLinks = document.getElementById("nav-links");
+      navToggle.addEventListener("click", () => navLinks.classList.toggle("open"));
+      navLinks.querySelectorAll(".nav-link").forEach((link) =>
+        link.addEventListener("click", () => navLinks.classList.remove("open"))
+      );
+
+      // Nav con blur al hacer scroll + sección activa
+      const nav = document.getElementById("nav");
+      const sections = document.querySelectorAll("main > section[id]");
+      const navLinkEls = document.querySelectorAll(".nav-link[href^='#']");
+      window.addEventListener("scroll", () => {
+        nav.classList.toggle("scrolled", window.scrollY > 8);
+      });
+      const sectionObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              navLinkEls.forEach((l) => l.classList.remove("active"));
+              const active = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
+              if (active) active.classList.add("active");
+            }
+          });
+        },
+        { rootMargin: "-40% 0px -50% 0px" }
+      );
+      sections.forEach((s) => sectionObserver.observe(s));
+
+      // Revelado al hacer scroll
+      const revealTargets = document.querySelectorAll(".reveal");
+      const revealObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("in-view");
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.15 }
+      );
+      revealTargets.forEach((el) => revealObserver.observe(el));
+
+      // Parallax muy sutil de la foto del hero al mover el ratón
+      const photoWrap = document.getElementById("hero-photo-wrap");
+      document.querySelector(".hero").addEventListener("mousemove", (e) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        photoWrap.style.transform = `translate(${x * 10}px, ${y * 10}px)`;
+      });
+      document.querySelector(".hero").addEventListener("mouseleave", () => {
+        photoWrap.style.transform = "translate(0, 0)";
+      });
+
+      // Inclinación 3D sutil en las tarjetas
+      document.querySelectorAll(".tilt-card").forEach((card) => {
+        card.addEventListener("mousemove", (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = (e.clientX - rect.left) / rect.width - 0.5;
+          const y = (e.clientY - rect.top) / rect.height - 0.5;
+          card.style.transform = `perspective(900px) translateY(-3px) rotateX(${y * -3.5}deg) rotateY(${x * 4.5}deg)`;
+        });
+        card.addEventListener("mouseleave", () => {
+          card.style.transform = "perspective(900px) translateY(0) rotateX(0) rotateY(0)";
+        });
+      });
+
+      // Botón "Dame un empujón": confeti + abre Instagram
+      const button = document.getElementById("message-button");
+      const confettiHost = document.getElementById("confetti-host");
+      button.addEventListener("click", () => {
+        confettiHost.innerHTML = "";
+        for (let i = 0; i < 12; i++) {
+          const piece = document.createElement("span");
+          piece.style.position = "absolute";
+          piece.style.top = "0";
+          piece.style.left = `${Math.random() * 60}px`;
+          piece.style.width = "7px";
+          piece.style.height = "7px";
+          piece.style.borderRadius = i % 2 ? "50%" : "2px";
+          piece.style.background = i % 2 ? "#e2b23c" : "#16362a";
+          piece.style.opacity = "1";
+          const angle = Math.random() * Math.PI * 2;
+          const distance = 50 + Math.random() * 60;
+          piece.style.transition = "transform 650ms ease-out, opacity 650ms ease-out";
+          confettiHost.appendChild(piece);
+          requestAnimationFrame(() => {
+            piece.style.transform = `translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * distance}px)`;
+            piece.style.opacity = "0";
+          });
+        }
+        setTimeout(() => {
+          window.open("https://www.instagram.com/Whsmario/", "_blank", "noopener");
+        }, 420);
+      });
+    </script>
+  </body>
+</html>
