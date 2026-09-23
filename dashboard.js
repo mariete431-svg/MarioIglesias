@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-
     /* =================================
        CALENDAR
     ================================= */
@@ -62,9 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!calendarGrid) return;
 
-
         calendarGrid.innerHTML = "";
-
 
         const year =
             displayedDate.getFullYear();
@@ -72,17 +69,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const month =
             displayedDate.getMonth();
 
-
         calendarMonth.textContent =
             `${monthNames[month]} ${year}`;
 
-
-        /*
-            JS:
-            0 = domingo
-            Nosotros queremos:
-            0 = lunes
-        */
 
         const firstDay =
             new Date(year, month, 1).getDay();
@@ -119,7 +108,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 );
 
             calendarGrid.appendChild(cell);
-
         }
 
 
@@ -138,7 +126,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 );
 
             calendarGrid.appendChild(cell);
-
         }
 
 
@@ -166,12 +153,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 );
 
             calendarGrid.appendChild(cell);
-
         }
 
 
         updateSelectedDate();
-
     }
 
 
@@ -199,7 +184,6 @@ document.addEventListener("DOMContentLoaded", () => {
             );
 
             return cell;
-
         }
 
 
@@ -226,7 +210,6 @@ document.addEventListener("DOMContentLoaded", () => {
             cell.classList.add(
                 "today"
             );
-
         }
 
 
@@ -235,7 +218,6 @@ document.addEventListener("DOMContentLoaded", () => {
             cell.classList.add(
                 "selected"
             );
-
         }
 
 
@@ -247,13 +229,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     new Date(cellDate);
 
                 renderCalendar();
-
             }
         );
 
 
         return cell;
-
     }
 
 
@@ -274,7 +254,6 @@ document.addEventListener("DOMContentLoaded", () => {
         selectedDate.textContent =
             formatted.charAt(0).toUpperCase() +
             formatted.slice(1);
-
     }
 
 
@@ -290,7 +269,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 );
 
             renderCalendar();
-
         }
     );
 
@@ -307,7 +285,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 );
 
             renderCalendar();
-
         }
     );
 
@@ -331,7 +308,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 );
 
             renderCalendar();
-
         }
     );
 
@@ -344,27 +320,16 @@ document.addEventListener("DOMContentLoaded", () => {
     ================================= */
 
     /*
-        IMPORTANTE:
-
-        GitHub Pages no puede guardar comentarios
-        en una base de datos por sí solo.
-
-        Para activar comentarios públicos reales,
-        configura estas dos variables:
-
-        window.SUPABASE_URL
-        window.SUPABASE_ANON_KEY
-
-        No pongas aquí la SERVICE_ROLE KEY.
+       PON AQUÍ LOS DATOS DE TU PROYECTO
     */
 
 
     const SUPABASE_URL =
-        window.SUPABASE_URL || "";
+        "https://uaojfcqpdngoqpjrmttx.supabase.co";
 
 
     const SUPABASE_ANON_KEY =
-        window.SUPABASE_ANON_KEY || "";
+        "PEGA_AQUI_TU_PUBLISHABLE_KEY";
 
 
     const form =
@@ -405,7 +370,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const supabaseReady =
         SUPABASE_URL &&
-        SUPABASE_ANON_KEY;
+        SUPABASE_ANON_KEY &&
+        !SUPABASE_ANON_KEY.includes(
+            "PEGA_AQUI"
+        );
 
 
     if (!supabaseReady) {
@@ -414,7 +382,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         status.textContent =
             "Comentarios públicos: conecta Supabase para activarlos.";
-
     }
 
 
@@ -429,6 +396,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 await fetch(
                     `${SUPABASE_URL}/rest/v1/comments?select=id,name,message,created_at&order=created_at.desc`,
                     {
+                        method: "GET",
+
                         headers: {
                             apikey:
                                 SUPABASE_ANON_KEY,
@@ -442,10 +411,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (!response.ok) {
 
+                const errorText =
+                    await response.text();
+
+                console.error(
+                    "Supabase:",
+                    errorText
+                );
+
                 throw new Error(
                     "No se pudieron cargar los comentarios."
                 );
-
             }
 
 
@@ -462,9 +438,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             status.textContent =
                 "No se han podido cargar los comentarios.";
-
         }
-
     }
 
 
@@ -487,7 +461,6 @@ document.addEventListener("DOMContentLoaded", () => {
             `;
 
             return;
-
         }
 
 
@@ -538,7 +511,6 @@ document.addEventListener("DOMContentLoaded", () => {
             );
 
         });
-
     }
 
 
@@ -566,7 +538,24 @@ document.addEventListener("DOMContentLoaded", () => {
                     "Completa los dos campos.";
 
                 return;
+            }
 
+
+            if (name.length > 50) {
+
+                status.textContent =
+                    "El nombre no puede superar los 50 caracteres.";
+
+                return;
+            }
+
+
+            if (message.length > 500) {
+
+                status.textContent =
+                    "El comentario no puede superar los 500 caracteres.";
+
+                return;
             }
 
 
@@ -608,15 +597,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 if (!response.ok) {
 
+                    const errorText =
+                        await response.text();
+
+                    console.error(
+                        "Supabase:",
+                        errorText
+                    );
+
                     throw new Error(
                         "No se pudo publicar."
                     );
-
                 }
 
 
                 nameInput.value = "";
+
                 textInput.value = "";
+
 
                 status.textContent =
                     "Comentario publicado.";
@@ -631,13 +629,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 status.textContent =
                     "No se ha podido publicar el comentario.";
-
             }
 
 
             submitButton.disabled =
                 !supabaseReady;
-
         }
     );
 
@@ -650,7 +646,6 @@ document.addEventListener("DOMContentLoaded", () => {
             .replaceAll(">", "&gt;")
             .replaceAll('"', "&quot;")
             .replaceAll("'", "&#039;");
-
     }
 
 
