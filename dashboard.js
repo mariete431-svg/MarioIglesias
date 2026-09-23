@@ -329,7 +329,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     const SUPABASE_ANON_KEY =
-        "PEGA_AQUI_TU_PUBLISHABLE_KEY";
+        "sb_publishable_ZB2XOPmn8io8Dd92r2JzLw_QlrTTI5q";
 
 
     const form =
