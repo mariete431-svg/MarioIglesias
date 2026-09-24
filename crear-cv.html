@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Crear tu CV · Mario Iglesias</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="cursor-glow" id="cursor-glow"></div>
+
+    <header class="site-header">
+      <div class="nav">
+        <a class="brand" href="index.html#inicio"><span class="brand-dot"></span>MARIO IGLESIAS</a>
+        <a class="nav-contact" href="index.html#proyectos"><span>Volver a proyectos ↗</span></a>
+      </div>
+    </header>
+
+    <main>
+      <section class="generator-page section">
+        <div class="generator-intro">
+          <p class="eyebrow reveal"><span class="eyebrow-line"></span>HERRAMIENTA — GENERADOR DE CV</p>
+          <h1 class="task-page-heading reveal">Crea tu <span>currículum.</span></h1>
+          <p class="reveal">
+            Rellena tus datos y verás tu CV tomar forma en directo, a la derecha.
+            Cuando esté listo, descárgalo en PDF con un clic. Todo se genera en tu
+            propio navegador — no se guarda ni se envía a ningún sitio.
+          </p>
+        </div>
+
+        <div class="generator-layout">
+          <!-- FORMULARIO -->
+          <div class="gen-card reveal">
+            <h3>Datos personales</h3>
+            <div class="gen-field">
+              <label for="f-name">Nombre completo</label>
+              <input type="text" id="f-name" placeholder="Ej: Laura Martín Ruiz" />
+            </div>
+            <div class="gen-field">
+              <label for="f-role">Título o perfil profesional</label>
+              <input type="text" id="f-role" placeholder="Ej: Diseñadora gráfica junior" />
+            </div>
+            <div class="gen-row">
+              <div class="gen-field">
+                <label for="f-email">Email</label>
+                <input type="email" id="f-email" placeholder="tucorreo@email.com" />
+              </div>
+              <div class="gen-field">
+                <label for="f-phone">Teléfono</label>
+                <input type="text" id="f-phone" placeholder="600 000 000" />
+              </div>
+            </div>
+            <div class="gen-field">
+              <label for="f-location">Ubicación</label>
+              <input type="text" id="f-location" placeholder="Ciudad, provincia" />
+            </div>
+
+            <div class="gen-section-divider">
+              <h3>Perfil</h3>
+              <div class="gen-field">
+                <label for="f-summary">Resumen breve</label>
+                <textarea id="f-summary" rows="4" placeholder="2-3 líneas sobre ti, tu experiencia y lo que buscas."></textarea>
+              </div>
+            </div>
+
+            <div class="gen-section-divider">
+              <h3>Formación</h3>
+              <div id="edu-list"></div>
+              <button type="button" class="gen-add-btn" id="add-edu">+ Añadir formación</button>
+            </div>
+
+            <div class="gen-section-divider">
+              <h3>Experiencia</h3>
+              <div id="exp-list"></div>
+              <button type="button" class="gen-add-btn" id="add-exp">+ Añadir experiencia</button>
+            </div>
+
+            <div class="gen-section-divider">
+              <h3>Habilidades e idiomas</h3>
+              <div class="gen-field">
+                <label for="f-skills">Habilidades (separadas por comas)</label>
+                <input type="text" id="f-skills" placeholder="Photoshop, Illustrator, Trabajo en equipo" />
+              </div>
+              <div class="gen-field">
+                <label for="f-langs">Idiomas (separados por comas)</label>
+                <input type="text" id="f-langs" placeholder="Español — nativo, Inglés — medio" />
+              </div>
+            </div>
+
+            <button class="magnetic-button primary-button gen-download" id="download-btn">
+              <span>Descargar en PDF</span>
+              <span class="button-arrow">↓</span>
+            </button>
+          </div>
+
+          <!-- VISTA PREVIA -->
+          <div class="cv-preview reveal" id="cv-preview">
+            <div class="cvp-name" id="p-name">Tu nombre</div>
+            <div class="cvp-role" id="p-role">Tu título profesional</div>
+            <div class="cvp-contact" id="p-contact"></div>
+
+            <div class="cvp-section">
+              <h4>Perfil</h4>
+              <p class="body-text cvp-empty" id="p-summary">Escribe tu resumen para verlo aquí.</p>
+            </div>
+
+            <div class="cvp-section">
+              <h4>Formación</h4>
+              <div id="p-edu"><p class="cvp-empty">Añade tu formación para verla aquí.</p></div>
+            </div>
+
+            <div class="cvp-section">
+              <h4>Experiencia</h4>
+              <div id="p-exp"><p class="cvp-empty">Añade tu experiencia para verla aquí.</p></div>
+            </div>
+
+            <div class="cvp-section">
+              <h4>Habilidades</h4>
+              <div class="cvp-chips" id="p-skills"><span class="cvp-empty" style="border:none;padding:0;">Añade tus habilidades.</span></div>
+            </div>
+
+            <div class="cvp-section">
+              <h4>Idiomas</h4>
+              <div class="cvp-chips" id="p-langs"><span class="cvp-empty" style="border:none;padding:0;">Añade tus idiomas.</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <div>MARIO IGLESIAS</div>
+        <div>Generador de CV — herramienta gratuita.</div>
+        <div id="year"></div>
+      </footer>
+    </main>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      const glow = document.getElementById("cursor-glow");
+      const isTouch = window.matchMedia("(hover: none)").matches;
+      const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (!isTouch && !prefersReduced) {
+        window.addEventListener("mousemove", (e) => {
+          glow.style.opacity = "1";
+          glow.style.left = e.clientX + "px";
+          glow.style.top = e.clientY + "px";
+        });
+        document.addEventListener("mouseleave", () => (glow.style.opacity = "0"));
+      }
+
+      const revealObserver = new IntersectionObserver(
+        (entries) => entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            revealObserver.unobserve(entry.target);
+          }
+        }),
+        { threshold: 0.1 }
+      );
+      document.querySelectorAll(".reveal").forEach((el, i) => {
+        el.classList.add(`delay-${Math.min(i, 3)}`);
+        revealObserver.observe(el);
+      });
+
+      // ---------- Entradas repetibles (formación / experiencia) ----------
+      let eduCount = 0;
+      let expCount = 0;
+
+      function addEduRow() {
+        eduCount++;
+        const id = `edu-${eduCount}`;
+        const wrap = document.createElement("div");
+        wrap.className = "gen-repeat-item";
+        wrap.dataset.id = id;
+        wrap.innerHTML = `
+          <span class="gen-remove" data-remove="${id}">eliminar</span>
+          <div class="gen-field"><label>Título / titulación</label><input type="text" class="edu-title" placeholder="Ej: Grado en Diseño" /></div>
+          <div class="gen-row">
+            <div class="gen-field"><label>Centro</label><input type="text" class="edu-center" placeholder="Nombre del centro" /></div>
+            <div class="gen-field"><label>Fechas</label><input type="text" class="edu-dates" placeholder="2020 – 2024" /></div>
+          </div>`;
+        document.getElementById("edu-list").appendChild(wrap);
+        wrap.querySelector(`[data-remove="${id}"]`).addEventListener("click", () => { wrap.remove(); updatePreview(); });
+        wrap.querySelectorAll("input").forEach((inp) => inp.addEventListener("input", updatePreview));
+      }
+
+      function addExpRow() {
+        expCount++;
+        const id = `exp-${expCount}`;
+        const wrap = document.createElement("div");
+        wrap.className = "gen-repeat-item";
+        wrap.dataset.id = id;
+        wrap.innerHTML = `
+          <span class="gen-remove" data-remove="${id}">eliminar</span>
+          <div class="gen-field"><label>Puesto</label><input type="text" class="exp-title" placeholder="Ej: Auxiliar administrativo" /></div>
+          <div class="gen-row">
+            <div class="gen-field"><label>Empresa</label><input type="text" class="exp-company" placeholder="Nombre de la empresa" /></div>
+            <div class="gen-field"><label>Fechas</label><input type="text" class="exp-dates" placeholder="Marzo 2023 – Actualidad" /></div>
+          </div>
+          <div class="gen-field"><label>Descripción breve</label><input type="text" class="exp-desc" placeholder="Qué hacías en este puesto" /></div>`;
+        document.getElementById("exp-list").appendChild(wrap);
+        wrap.querySelector(`[data-remove="${id}"]`).addEventListener("click", () => { wrap.remove(); updatePreview(); });
+        wrap.querySelectorAll("input").forEach((inp) => inp.addEventListener("input", updatePreview));
+      }
+
+      document.getElementById("add-edu").addEventListener("click", () => { addEduRow(); updatePreview(); });
+      document.getElementById("add-exp").addEventListener("click", () => { addExpRow(); updatePreview(); });
+      addEduRow();
+      addExpRow();
+
+      // ---------- Vista previa en directo ----------
+      const fields = ["f-name", "f-role", "f-email", "f-phone", "f-location", "f-summary", "f-skills", "f-langs"];
+      fields.forEach((id) => document.getElementById(id).addEventListener("input", updatePreview));
+
+      function escapeHtml(str) {
+        return str.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+      }
+
+      function updatePreview() {
+        const name = document.getElementById("f-name").value.trim();
+        const role = document.getElementById("f-role").value.trim();
+        const email = document.getElementById("f-email").value.trim();
+        const phone = document.getElementById("f-phone").value.trim();
+        const location = document.getElementById("f-location").value.trim();
+        const summary = document.getElementById("f-summary").value.trim();
+        const skills = document.getElementById("f-skills").value.split(",").map((s) => s.trim()).filter(Boolean);
+        const langs = document.getElementById("f-langs").value.split(",").map((s) => s.trim()).filter(Boolean);
+
+        document.getElementById("p-name").textContent = name || "Tu nombre";
+        document.getElementById("p-role").textContent = role || "Tu título profesional";
+
+        const contactBits = [location, phone, email].filter(Boolean);
+        document.getElementById("p-contact").innerHTML = contactBits.map((c) => `<span>${escapeHtml(c)}</span>`).join("");
+
+        const pSummary = document.getElementById("p-summary");
+        pSummary.textContent = summary || "Escribe tu resumen para verlo aquí.";
+        pSummary.classList.toggle("cvp-empty", !summary);
+
+        // Formación
+        const eduRows = [...document.querySelectorAll("#edu-list .gen-repeat-item")]
+          .map((row) => ({
+            title: row.querySelector(".edu-title").value.trim(),
+            center: row.querySelector(".edu-center").value.trim(),
+            dates: row.querySelector(".edu-dates").value.trim(),
+          }))
+          .filter((e) => e.title || e.center);
+
+        const eduHost = document.getElementById("p-edu");
+        eduHost.innerHTML = eduRows.length
+          ? eduRows.map((e) => `
+              <div class="cvp-entry">
+                ${e.dates ? `<span class="date">${escapeHtml(e.dates)}</span>` : ""}
+                <div class="title-line">${escapeHtml(e.title || "—")}</div>
+                ${e.center ? `<div class="sub-line">${escapeHtml(e.center)}</div>` : ""}
+              </div>`).join("")
+          : `<p class="cvp-empty">Añade tu formación para verla aquí.</p>`;
+
+        // Experiencia
+        const expRows = [...document.querySelectorAll("#exp-list .gen-repeat-item")]
+          .map((row) => ({
+            title: row.querySelector(".exp-title").value.trim(),
+            company: row.querySelector(".exp-company").value.trim(),
+            dates: row.querySelector(".exp-dates").value.trim(),
+            desc: row.querySelector(".exp-desc").value.trim(),
+          }))
+          .filter((e) => e.title || e.company);
+
+        const expHost = document.getElementById("p-exp");
+        expHost.innerHTML = expRows.length
+          ? expRows.map((e) => `
+              <div class="cvp-entry">
+                ${e.dates ? `<span class="date">${escapeHtml(e.dates)}</span>` : ""}
+                <div class="title-line">${escapeHtml(e.title || "—")}</div>
+                ${e.company ? `<div class="sub-line">${escapeHtml(e.company)}</div>` : ""}
+                ${e.desc ? `<div class="desc">${escapeHtml(e.desc)}</div>` : ""}
+              </div>`).join("")
+          : `<p class="cvp-empty">Añade tu experiencia para verla aquí.</p>`;
+
+        // Habilidades / idiomas
+        const skillsHost = document.getElementById("p-skills");
+        skillsHost.innerHTML = skills.length
+          ? skills.map((s) => `<span>${escapeHtml(s)}</span>`).join("")
+          : `<span class="cvp-empty" style="border:none;padding:0;">Añade tus habilidades.</span>`;
+
+        const langsHost = document.getElementById("p-langs");
+        langsHost.innerHTML = langs.length
+          ? langs.map((l) => `<span>${escapeHtml(l)}</span>`).join("")
+          : `<span class="cvp-empty" style="border:none;padding:0;">Añade tus idiomas.</span>`;
+      }
+
+      updatePreview();
+
+      document.getElementById("download-btn").addEventListener("click", () => {
+        const name = document.getElementById("f-name").value.trim();
+        document.title = name ? `CV — ${name}` : "Mi CV";
+        window.print();
+      });
+    </script>
+  </body>
+</html>
