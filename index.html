@@ -9,7 +9,33 @@
 
     <link rel="stylesheet" href="style.css">
 </head>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
 
+    const menuButton = document.querySelector(".mobile-menu-button");
+    const nav = document.querySelector(".nav");
+
+    if (!menuButton || !nav) return;
+
+    menuButton.addEventListener("click", () => {
+
+        const open = nav.classList.toggle("mobile-menu-open");
+
+        menuButton.setAttribute("aria-expanded", open ? "true" : "false");
+
+    });
+
+    document.querySelectorAll(".nav-links a").forEach(link => {
+
+        link.addEventListener("click", () => {
+            nav.classList.remove("mobile-menu-open");
+            menuButton.setAttribute("aria-expanded", "false");
+        });
+
+    });
+
+});
+</script>
 <body>
 
     <!-- Cursor decorativo -->
