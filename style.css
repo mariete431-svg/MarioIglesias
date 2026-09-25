@@ -3045,3 +3045,44 @@ a {
         font-size: 17px;
     }
 }
+@media (max-width: 900px) {
+
+    .contact {
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow: hidden !important;
+    }
+
+    .contact-content {
+        width: calc(100% - 36px) !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        overflow: hidden !important;
+    }
+
+    .contact h2 {
+        width: 100% !important;
+        max-width: 100% !important;
+
+        font-size: clamp(58px, 16vw, 100px) !important;
+
+        line-height: 0.9 !important;
+        letter-spacing: -0.06em !important;
+
+        white-space: normal !important;
+
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+
+        transform: none !important;
+    }
+
+    .contact-email {
+        max-width: 100% !important;
+
+        font-size: clamp(16px, 4.8vw, 24px) !important;
+
+        overflow-wrap: anywhere !important;
+        word-break: break-word !important;
+    }
+}
