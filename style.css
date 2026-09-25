@@ -2947,3 +2947,101 @@ a {
     }
 
 }
+/* =========================================================
+   FIX CONTACTO EN MÓVIL
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    /* La sección nunca puede superar el ancho de la pantalla */
+    .contact {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        overflow: hidden;
+    }
+
+    .contact-content {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        padding-left: 32px;
+        padding-right: 32px;
+        overflow: hidden;
+    }
+
+    /* Título ¿Hablamos? */
+    .contact h2 {
+        width: 100%;
+        max-width: 100%;
+
+        font-size: clamp(55px, 16vw, 100px);
+        line-height: 0.9;
+        letter-spacing: -0.06em;
+
+        white-space: normal;
+        overflow-wrap: normal;
+        word-break: normal;
+
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        transform: none !important;
+    }
+
+    /* Texto */
+    .contact-content > p {
+        width: 100%;
+        max-width: 100%;
+
+        font-size: 18px;
+        line-height: 1.5;
+    }
+
+    /* Email */
+    .contact-email {
+        display: flex;
+        align-items: center;
+
+        width: 100%;
+        max-width: 100%;
+
+        gap: 12px;
+
+        font-size: clamp(16px, 4.8vw, 24px);
+
+        overflow-wrap: anywhere;
+        word-break: break-word;
+    }
+
+    .contact-email span {
+        flex-shrink: 0;
+    }
+
+    /* Instagram */
+    .contact-social {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+
+/* Móviles pequeños */
+@media (max-width: 480px) {
+
+    .contact-content {
+        padding-left: 32px;
+        padding-right: 32px;
+    }
+
+    .contact h2 {
+        font-size: 16vw;
+    }
+
+    .contact-content > p {
+        font-size: 17px;
+    }
+
+    .contact-email {
+        font-size: 17px;
+    }
+}
