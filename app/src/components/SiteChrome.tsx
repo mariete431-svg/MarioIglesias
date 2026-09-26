@@ -10,6 +10,7 @@ const navigation = [
   { label: "Trayectoria", to: "/#trayectoria" },
   { label: "Proyectos", to: "/#proyectos" },
   { label: "CV", to: "/cv" },
+  { label: "Opiniones", to: "/#opiniones" },
   { label: "Contacto", to: "/#contacto" },
 ];
 
