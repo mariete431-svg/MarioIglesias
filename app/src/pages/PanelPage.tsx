@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { CountUp, Reveal } from "@/components/EditorialEffects";
 import { PageHero, SectionHeading, usePageTitle } from "@/components/SiteChrome";
 import { useToast } from "@/components/Toast";
-import { isAdminSession, supabase } from "@/lib/supabase";
+import { isAdminSession, publicClient, supabase } from "@/lib/supabase";
 import { capitalize, dayKey, formatDay } from "@/lib/appointments";
 
 /* ---------- Calendario: mismos datos que el panel antiguo ---------- */
@@ -163,7 +163,7 @@ function Guestbook() {
   const [sending, setSending] = useState(false);
 
   const load = useCallback(async () => {
-    const { data, error } = await supabase.from("comments").select("id, name, message, created_at").order("created_at", { ascending: false });
+    const { data, error } = await publicClient.from("comments").select("id, name, message, created_at").order("created_at", { ascending: false });
     setLoading(false);
     if (!error && data) setComments(data);
   }, []);
@@ -174,7 +174,7 @@ function Guestbook() {
     const n = name.trim(), msg = message.trim();
     if (!n || !msg) return toast("Escribe tu nombre y tu comentario.", true);
     setSending(true);
-    const { error } = await supabase.from("comments").insert({ name: n.slice(0, 60), message: msg.slice(0, 500) });
+    const { error } = await publicClient.from("comments").insert({ name: n.slice(0, 50), message: msg.slice(0, 500) });
     setSending(false);
     if (error) return toast("No se ha podido publicar. Inténtalo de nuevo.", true);
     setName(""); setMessage("");
@@ -184,7 +184,7 @@ function Guestbook() {
 
   return <div className="guestbook">
     <Reveal><form className="booking-form" onSubmit={submit}>
-      <div className="form-row"><label htmlFor="gb-name">Tu nombre</label><input id="gb-name" value={name} onChange={e => setName(e.target.value)} maxLength={60} placeholder="¿Cómo te llamas?" /></div>
+      <div className="form-row"><label htmlFor="gb-name">Tu nombre</label><input id="gb-name" value={name} onChange={e => setName(e.target.value)} maxLength={50} placeholder="¿Cómo te llamas?" /></div>
       <div className="form-row"><label htmlFor="gb-msg">Comentario</label><textarea id="gb-msg" rows={5} value={message} onChange={e => setMessage(e.target.value)} maxLength={500} placeholder="Escribe algo…" /></div>
       <div className="form-actions"><small className="tasks-count" style={{ color: "var(--muted-foreground)" }}>{message.length}/500</small><Button type="submit" variant="luxury" disabled={sending}>{sending ? "Publicando…" : "Publicar comentario"} {!sending && <ArrowRight />}</Button></div>
     </form></Reveal>

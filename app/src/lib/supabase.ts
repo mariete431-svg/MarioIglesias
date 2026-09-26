@@ -7,6 +7,17 @@ export const supabase = createClient(
   "sb_publishable_ZB2XOPmn8io8Dd92r2JzLw_QlrTTI5q",
 );
 
+/**
+ * Cliente "de visitante": nunca usa la sesión de administrador.
+ * Los comentarios y las reservas solo están abiertos al público (rol anon) en la base de datos,
+ * así que con la sesión de Mario abierta devolverían una lista vacía.
+ */
+export const publicClient = createClient(
+  "https://uaojfcqpdngoqpjrmttx.supabase.co",
+  "sb_publishable_ZB2XOPmn8io8Dd92r2JzLw_QlrTTI5q",
+  { auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false, storageKey: "sb-publico" } },
+);
+
 /** ¿La sesión abierta en este navegador es la de un administrador? */
 export async function isAdminSession() {
   const { data } = await supabase.auth.getSession();
