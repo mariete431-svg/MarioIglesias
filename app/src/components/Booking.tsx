@@ -18,7 +18,8 @@ const bookingSchema = z.object({
 type Field = "name" | "email" | "phone" | "topic" | "consent";
 type Form = { name: string; email: string; phone: string; topic: string; consent: boolean };
 
-export function Booking() {
+/** compact: versión reducida para mostrarla dentro del desplegable de la portada. */
+export function Booking({ compact = false }: { compact?: boolean }) {
   const reduced = useMotionPreference();
   const today = dayKey(new Date());
   const [monthOffset, setMonthOffset] = useState(0);
@@ -130,7 +131,7 @@ export function Booking() {
     setMonthOffset(0); setRetryDays(value => value + 1); setStep(0);
   };
 
-  return <div className="booking-panel">
+  return <div className={`booking-panel ${compact ? "booking-compact" : ""}`}>
     <div className="booking-progress" aria-label={`Paso ${step + 1} de 4`}>
       <div className="booking-step-labels">{steps.map((label, index) => <span key={label} className={index === step ? "active" : index < step ? "complete" : ""}><small>{index + 1}</small> {label}</span>)}</div>
       <div className="progress-track"><div style={{ width: `${((step + 1) / 4) * 100}%` }} /></div>
