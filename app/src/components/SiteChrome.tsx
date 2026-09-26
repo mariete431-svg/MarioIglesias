@@ -39,12 +39,18 @@ export function SiteHeader() {
     <header className="site-header"><div className="header-inner">
       <NavItem to="/#inicio" className="brand"><span aria-label="Mario Iglesias, volver al inicio">Mario Iglesias<span className="brand-dot">.</span></span></NavItem>
       <nav className="desktop-nav" aria-label="Navegación principal">{navigation.map(item => <NavItem key={item.label} to={item.to} className="nav-link">{item.label}</NavItem>)}</nav>
-      <NavItem to="/#reservar" className="header-book">Reservar reunión <ArrowUpRight size={15} strokeWidth={1.5} /></NavItem>
+      <div className="header-actions">
+        <NavItem to="/crear-cv" className="header-book header-book-light">Crear CV <ArrowUpRight size={15} strokeWidth={1.5} /></NavItem>
+        <NavItem to="/#reservar" className="header-book">Reservar<span className="hide-mobile">&nbsp;reunión</span> <ArrowUpRight size={15} strokeWidth={1.5} /></NavItem>
+      </div>
       <Button variant="text" size="icon" className="menu-trigger" aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"} aria-expanded={menuOpen} onClick={() => setMenuOpen(value => !value)}>{menuOpen ? <X /> : <Menu />}</Button>
     </div></header>
     {menuOpen && <motion.nav className="mobile-menu" aria-label="Navegación móvil" initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .35, ease: [.22, 1, .36, 1] }}>
-      {navigation.map((item, i) => <motion.div key={item.label} initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .05 + i * .05, duration: .45 }}><NavItem to={item.to} onClick={() => setMenuOpen(false)}><span>0{i + 1}</span>{item.label}<ArrowUpRight /></NavItem></motion.div>)}
-      <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .32, duration: .45 }}><NavItem to="/#reservar" onClick={() => setMenuOpen(false)}><span>06</span>Reservar reunión<ArrowUpRight /></NavItem></motion.div>
+      <motion.div className="mobile-menu-main" initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .05, duration: .45 }}>
+        <NavItem to="/#reservar" className="mobile-cta mobile-cta-dark" onClick={() => setMenuOpen(false)}><small>RESERVA</small>Reservar reunión<ArrowUpRight /></NavItem>
+        <NavItem to="/crear-cv" className="mobile-cta" onClick={() => setMenuOpen(false)}><small>HERRAMIENTA GRATUITA</small>Crear mi CV<ArrowUpRight /></NavItem>
+      </motion.div>
+      {navigation.map((item, i) => <motion.div key={item.label} initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .12 + i * .05, duration: .45 }}><NavItem to={item.to} onClick={() => setMenuOpen(false)}><span>0{i + 1}</span>{item.label}<ArrowUpRight /></NavItem></motion.div>)}
       <p>Adeje, Tenerife — 2026</p>
     </motion.nav>}
   </>;
