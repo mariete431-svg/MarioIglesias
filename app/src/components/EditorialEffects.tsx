@@ -19,9 +19,9 @@ export function Entrance() {
   const [open, setOpen] = useState(false);
   useEffect(() => {
     if (reduced || sessionStorage.getItem("mi-intro-seen")) return;
-    sessionStorage.setItem("mi-intro-seen", "1");
     setOpen(true);
-    const timer = window.setTimeout(() => setOpen(false), 950);
+    // Se marca como vista solo al cerrarse: si el efecto se repite, la cortina no se queda puesta
+    const timer = window.setTimeout(() => { setOpen(false); sessionStorage.setItem("mi-intro-seen", "1"); }, 950);
     return () => window.clearTimeout(timer);
   }, [reduced]);
   return <AnimatePresence>{open && <motion.div className="entrance-screen" initial={{ y: 0 }} animate={{ y: 0 }} exit={{ y: "-102%" }} transition={{ duration: .45, ease: [.64, 0, .24, 1] }} aria-hidden="true">
