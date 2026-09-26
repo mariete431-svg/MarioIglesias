@@ -5,151 +5,365 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Mario Iglesias — Aprendo creando</title>
-    <meta name="description" content="Mario Iglesias — Aprendo creando. Programación web, proyectos personales y aprendizaje.">
+    <meta name="description" content="Mario Iglesias — Aprendo creando. Desde Adeje, Tenerife: cocina, atención al cliente y programación web.">
+    <meta name="theme-color" content="#1e3a2b">
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="universo.css">
 </head>
 
 <body>
 
-    <!-- Cursor decorativo -->
-    <div class="cursor-glow"></div>
+    <!-- Dibujos reutilizables -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <defs>
+            <!-- Brownie, chihuahua color chocolate (de perfil) -->
+            <symbol id="brownie" viewBox="0 0 160 120">
+                <path d="M118 62c10-6 20-4 26-14" fill="none" stroke="#6b3e26" stroke-width="6" stroke-linecap="round"/>
+                <ellipse cx="86" cy="72" rx="34" ry="20" fill="#7a4a2e"/>
+                <rect x="60" y="80" width="9" height="30" rx="4.5" fill="#6b3e26"/>
+                <rect x="74" y="82" width="9" height="28" rx="4.5" fill="#7a4a2e"/>
+                <rect x="98" y="80" width="9" height="30" rx="4.5" fill="#6b3e26"/>
+                <rect x="110" y="78" width="9" height="32" rx="4.5" fill="#7a4a2e"/>
+                <path d="M50 58c-6-4-10-10-8-18" fill="none" stroke="#7a4a2e" stroke-width="16" stroke-linecap="round"/>
+                <path d="M24 16 L36 44 L16 40 Z" fill="#6b3e26"/>
+                <path d="M27 24 L33 40 L22 38 Z" fill="#d9a38a"/>
+                <path d="M58 12 L56 44 L40 34 Z" fill="#6b3e26"/>
+                <path d="M55 21 L54 39 L45 33 Z" fill="#d9a38a"/>
+                <circle cx="40" cy="46" r="20" fill="#7a4a2e"/>
+                <ellipse cx="24" cy="54" rx="11" ry="8" fill="#8d5a3a"/>
+                <circle cx="15" cy="52" r="3.6" fill="#1b120c"/>
+                <circle cx="37" cy="42" r="4.4" fill="#1b120c"/>
+                <circle cx="38.4" cy="40.6" r="1.4" fill="#fff"/>
+                <path d="M20 60c3 2 7 2 10 0" fill="none" stroke="#1b120c" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M46 62c6 2 12 2 16-2" fill="none" stroke="#f2cf66" stroke-width="4" stroke-linecap="round"/>
+            </symbol>
+
+            <!-- Teide -->
+            <symbol id="teide" viewBox="0 0 200 120">
+                <path d="M0 120 L70 38 Q84 22 96 26 L104 20 Q114 22 124 36 L200 120 Z" fill="currentColor"/>
+                <path d="M84 30 Q96 18 104 20 Q112 22 118 30 L110 34 L102 28 L94 36 Z" fill="#f5efe2" opacity=".9"/>
+            </symbol>
+        </defs>
+    </svg>
+
+
+    <!-- Cursor personalizado -->
+    <div class="cursor" aria-hidden="true">
+        <div class="cursor-ring"><span class="cursor-label"></span></div>
+        <div class="cursor-dot"></div>
+    </div>
+
+
+    <!-- Barra de progreso de lectura -->
+    <div class="progress" aria-hidden="true"><div class="progress-bar"></div></div>
+
 
     <!-- NAV -->
     <header class="site-header">
         <nav class="nav">
 
-            <a href="#inicio" class="brand">
-                <span class="brand-dot"></span>
-                MARIO IGLESIAS
-            </a>
+            <a href="#inicio" class="brand" data-cursor="Inicio">Mario<span>.</span></a>
 
-            <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
-                <span></span>
+            <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinks">
+                <span></span><span></span>
             </button>
 
             <div class="nav-links" id="navLinks">
-                <a href="#sobre-mi">Sobre mí</a>
-                <a href="#proyectos">Proyectos</a>
-                <a href="crear-cv.html">Crear CV</a>
-                <a href="dashboard.html">Mi panel</a>
-                <a href="#contacto">Contacto</a>
+                <a href="#quien-soy"><i>01</i> Quién soy</a>
+                <a href="#recorrido"><i>02</i> Qué he hecho</a>
+                <a href="#construyendo"><i>03</i> Qué construyo</a>
+                <a href="#cita" class="nav-cta">Pide cita</a>
             </div>
-
-            <a href="#contacto" class="nav-contact">
-                Hablemos
-                <span>↗</span>
-            </a>
 
         </nav>
     </header>
 
 
+    <!-- Índice lateral de capítulos (escritorio) -->
+    <aside class="chapters" aria-label="Capítulos">
+        <a href="#quien-soy" data-chapter="quien-soy"><span>01</span><b>Quién soy</b></a>
+        <a href="#recorrido" data-chapter="recorrido"><span>02</span><b>Qué he hecho</b></a>
+        <a href="#construyendo" data-chapter="construyendo"><span>03</span><b>Qué construyo</b></a>
+    </aside>
+
+
     <main>
 
         <!-- =========================
-             HERO
+             HERO CINEMATOGRÁFICO
         ========================== -->
 
-        <section class="hero section" id="inicio">
+        <section class="hero" id="inicio">
 
-            <div class="hero-background">
-                <div class="hero-orb hero-orb-one"></div>
-                <div class="hero-orb hero-orb-two"></div>
+            <div class="hero-media" aria-hidden="true">
+                <div class="scene">
+                    <picture>
+                        <source media="(max-width: 800px)" srcset="tenerife-movil.jpg">
+                        <img class="layer hero-photo" data-depth="0.25" src="tenerife.jpg" alt="" width="2400" height="1600" fetchpriority="high">
+                    </picture>
+                </div>
+                <div class="hero-shade"></div>
             </div>
-
-            <div class="hero-grid"></div>
 
             <div class="hero-content">
 
-                <div class="eyebrow reveal">
-                    <span class="eyebrow-line"></span>
-                    En construcción · 2026
-                </div>
+                <p class="hero-kicker reveal">Adeje, Tenerife · 2026</p>
 
-                <h1 class="hero-title reveal delay-1">
-                    Hola,<br>
-                    soy <span>Mario.</span>
+                <h1 class="hero-title">
+                    <span class="line"><span class="word">Mario</span></span>
+                    <span class="line"><em class="word">Iglesias</em></span>
                 </h1>
 
-                <div class="hero-bottom reveal delay-2">
+                <p class="hero-lead reveal">
+                    Vengo de la cocina y del trato con la gente.
+                    Ahora aprendo a <strong>construir cosas en la web</strong>,
+                    paso a paso, desde mi isla.
+                </p>
 
-                    <p class="hero-description">
-                        Estoy aprendiendo programación web y edición de vídeo.
-                        Este es mi espacio para construir proyectos reales y
-                        enseñar lo que voy consiguiendo, paso a paso.
-                    </p>
-
-                    <div class="hero-actions">
-
-                        <a href="#proyectos" class="magnetic-button primary-button">
-                            <span>Ver proyectos</span>
-                            <span class="button-arrow">↗</span>
-                        </a>
-
-                        <a href="#sobre-mi" class="text-button">
-                            Conocerme
-                            <span>↓</span>
-                        </a>
-
-                    </div>
-
+                <div class="hero-actions reveal">
+                    <a href="#quien-soy" class="btn btn-yellow" data-cursor="Vamos">Entrar en mi universo</a>
+                    <a href="#cita" class="btn btn-ghost" data-cursor="Agendar">Pide una cita</a>
                 </div>
 
             </div>
 
-            <div class="hero-signature reveal delay-3">
-                Aprendo<br>
-                <span>creando.</span>
+            <a href="#quien-soy" class="scroll-cue" aria-label="Bajar al primer capítulo">
+                <span></span>
+            </a>
+
+        </section>
+
+
+        <!-- =========================
+             01 · QUIÉN SOY
+        ========================== -->
+
+        <section class="chapter" id="quien-soy">
+
+            <header class="chapter-head container">
+                <p class="chapter-num reveal">Capítulo 01</p>
+                <h2 class="chapter-title reveal">Quién <em>soy</em>.</h2>
+            </header>
+
+            <div class="about container">
+
+                <figure class="portrait reveal" data-tilt>
+                    <img src="foto.jpg" alt="Retrato de Mario Iglesias" width="800" height="1067" loading="lazy">
+                    <figcaption>Mario · Adeje</figcaption>
+                </figure>
+
+                <div class="about-copy">
+                    <p class="big-quote reveal">
+                        “Un chico trabajador, con ganas de aprender
+                        y facilidad para trabajar en equipo.”
+                    </p>
+                    <p class="reveal">
+                        He pasado por cocinas, perfumerías y restaurantes.
+                        De todos he aprendido lo mismo: <strong>las cosas bien hechas
+                        se notan en los detalles</strong>. Ahora llevo esa idea a la web.
+                    </p>
+                    <ul class="facts reveal">
+                        <li><b>Base</b> Adeje, Tenerife</li>
+                        <li><b>Disponibilidad</b> Total · España</li>
+                        <li><b>Idiomas</b> Español · Inglés medio</li>
+                    </ul>
+                </div>
+
             </div>
 
-            <div class="scroll-indicator">
-                <span>SCROLL</span>
-                <div></div>
+
+            <!-- Objetos personales en 3D -->
+            <div class="objects-intro container">
+                <h3 class="reveal">Mi pequeño universo</h3>
+                <p class="reveal">Cinco cosas que dicen más de mí que un currículum. Pasa el ratón por encima.</p>
+            </div>
+
+            <div class="objects container">
+
+                <article class="object reveal" data-tilt style="--tone:#f2cf66">
+                    <div class="object-stage">
+                        <div class="depth d1 plate"></div>
+                        <svg class="depth d2" viewBox="0 0 120 120" aria-hidden="true">
+                            <ellipse cx="54" cy="70" rx="36" ry="12" fill="#2b2b2b"/>
+                            <rect x="86" y="64" width="34" height="8" rx="4" fill="#1e3a2b"/>
+                            <ellipse cx="54" cy="66" rx="30" ry="9" fill="#3a3a3a"/>
+                        </svg>
+                        <svg class="depth d3" viewBox="0 0 120 120" aria-hidden="true">
+                            <ellipse cx="54" cy="62" rx="12" ry="6" fill="#fff"/>
+                            <circle cx="54" cy="62" r="5" fill="#f2b33d"/>
+                            <path d="M40 40 q4 -8 0 -16 M54 36 q4 -8 0 -16 M68 40 q4 -8 0 -16" stroke="#c8bfae" stroke-width="3" fill="none" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <h4>Cocina</h4>
+                    <p>Casi dos años en cocina en el Restaurante Marietta. Ritmo, orden y equipo.</p>
+                </article>
+
+                <article class="object reveal" data-tilt style="--tone:#dfe7df">
+                    <div class="object-stage">
+                        <div class="depth d1 plate"></div>
+                        <svg class="depth d2" viewBox="0 0 120 120" aria-hidden="true">
+                            <rect x="36" y="14" width="48" height="92" rx="12" fill="#1b1b1d"/>
+                            <rect x="40" y="18" width="40" height="84" rx="9" fill="#2c5140"/>
+                        </svg>
+                        <svg class="depth d3" viewBox="0 0 120 120" aria-hidden="true">
+                            <rect x="52" y="22" width="16" height="5" rx="2.5" fill="#1b1b1d"/>
+                            <rect x="45" y="36" width="12" height="12" rx="3" fill="#f2cf66"/>
+                            <rect x="63" y="36" width="12" height="12" rx="3" fill="#f5efe2"/>
+                            <rect x="45" y="54" width="12" height="12" rx="3" fill="#f5efe2"/>
+                            <rect x="63" y="54" width="12" height="12" rx="3" fill="#e98a5c"/>
+                        </svg>
+                    </div>
+                    <h4>Diseño Apple</h4>
+                    <p>Me encanta lo que parece sencillo pero está pensado al milímetro.</p>
+                </article>
+
+                <article class="object reveal" data-tilt style="--tone:#f7e3a3">
+                    <div class="object-stage">
+                        <div class="depth d1 plate"></div>
+                        <svg class="depth d2" viewBox="0 0 120 120" aria-hidden="true">
+                            <circle cx="84" cy="34" r="12" fill="#f2cf66"/>
+                            <path d="M0 110 L0 96 Q30 90 60 96 T120 96 L120 110 Z" fill="#3f7c8c"/>
+                        </svg>
+                        <svg class="depth d3" viewBox="0 0 200 120" preserveAspectRatio="xMidYMax meet" aria-hidden="true" style="color:#1e3a2b">
+                            <use href="#teide"/>
+                        </svg>
+                    </div>
+                    <h4>Tenerife</h4>
+                    <p>Mi casa. Sol, mar y el Teide vigilando desde arriba.</p>
+                </article>
+
+                <article class="object object-brownie reveal" data-tilt style="--tone:#ecd9c6" id="brownieCard">
+                    <div class="object-stage">
+                        <div class="depth d1 plate"></div>
+                        <svg class="depth d2 brownie-bed" viewBox="0 0 120 120" aria-hidden="true">
+                            <ellipse cx="60" cy="96" rx="46" ry="12" fill="#c75b3f"/>
+                            <ellipse cx="60" cy="92" rx="38" ry="8" fill="#e27a58"/>
+                        </svg>
+                        <svg class="depth d3 brownie-dog" viewBox="0 0 160 120" aria-hidden="true">
+                            <use href="#brownie"/>
+                        </svg>
+                    </div>
+                    <h4>Brownie</h4>
+                    <p>Chihuahua, 4 meses, color chocolate. El verdadero jefe de casa.</p>
+                </article>
+
+                <article class="object reveal" data-tilt style="--tone:#cfdccf">
+                    <div class="object-stage">
+                        <div class="depth d1 plate"></div>
+                        <svg class="depth d2" viewBox="0 0 120 120" aria-hidden="true">
+                            <rect x="18" y="26" width="84" height="54" rx="6" fill="#1b1b1d"/>
+                            <rect x="22" y="30" width="76" height="46" rx="3" fill="#16241b"/>
+                            <path d="M8 84 H112 L106 92 H14 Z" fill="#9aa39b"/>
+                        </svg>
+                        <svg class="depth d3" viewBox="0 0 120 120" aria-hidden="true">
+                            <text x="30" y="48" font-family="ui-monospace, Menlo, monospace" font-size="10" fill="#f2cf66">&lt;html&gt;</text>
+                            <rect x="30" y="54" width="34" height="4" rx="2" fill="#8fb996"/>
+                            <rect x="36" y="62" width="44" height="4" rx="2" fill="#f5efe2" opacity=".7"/>
+                        </svg>
+                    </div>
+                    <h4>Tecnología</h4>
+                    <p>HTML, CSS, JavaScript, Git… Cada día un poquito más.</p>
+                </article>
+
             </div>
 
         </section>
 
 
         <!-- =========================
-             INTRO
+             02 · QUÉ HE HECHO (CV)
         ========================== -->
 
-        <section class="intro section">
+        <section class="chapter chapter-dark" id="recorrido">
 
-            <div class="section-number reveal">01 / SOBRE MÍ</div>
+            <header class="chapter-head container">
+                <p class="chapter-num reveal">Capítulo 02</p>
+                <h2 class="chapter-title reveal">Qué he <em>hecho</em>.</h2>
+                <p class="chapter-lead reveal">Mi recorrido, de la cocina a la pantalla. Toca cada etapa para ver más.</p>
+            </header>
 
-            <div class="intro-layout">
+            <div class="container">
 
-                <div class="intro-heading reveal">
-                    <span>Aprendo</span>
-                    <strong>creando.</strong>
+                <div class="filters reveal" role="group" aria-label="Filtrar recorrido">
+                    <button class="filter active" data-filter="all" aria-pressed="true">Todo</button>
+                    <button class="filter" data-filter="work" aria-pressed="false">Trabajo</button>
+                    <button class="filter" data-filter="study" aria-pressed="false">Formación</button>
                 </div>
 
-                <div class="intro-copy reveal delay-1">
+                <ol class="timeline" id="timeline">
 
-                    <p class="large-copy">
-                        Construyo poco a poco,
-                        aprendiendo por el camino.
-                    </p>
+                    <li class="tl-item" data-type="study">
+                        <button class="tl-head" aria-expanded="false">
+                            <span class="tl-date">2025</span>
+                            <span class="tl-title">Inside LVMH Certificate</span>
+                            <span class="tl-place">Curso online</span>
+                        </button>
+                        <div class="tl-body"><p>Operations &amp; Supply Chain, Retail &amp; Client Experience. Cómo funcionan por dentro las marcas de lujo y cómo cuidan a sus clientes.</p></div>
+                    </li>
 
-                    <p>
-                        Estoy aprendiendo programación web y edición de vídeo
-                        por mi cuenta. Me gusta crear proyectos reales, aunque
-                        sean pequeños, y usarlos para mejorar cada día.
-                    </p>
+                    <li class="tl-item" data-type="work">
+                        <button class="tl-head" aria-expanded="false">
+                            <span class="tl-date">Mar 2024 — Dic 2025</span>
+                            <span class="tl-title">Ayudante de cocina</span>
+                            <span class="tl-place">Restaurante Marietta · Gourmetland, Adeje</span>
+                        </button>
+                        <div class="tl-body"><p>Preparación, orden y ritmo de servicio en una cocina de restaurante. Aprendí a trabajar bajo presión y en equipo, sin perder el detalle.</p></div>
+                    </li>
 
-                    <div class="skills-line">
+                    <li class="tl-item" data-type="work">
+                        <button class="tl-head" aria-expanded="false">
+                            <span class="tl-date">Mar 2023 — Oct 2023</span>
+                            <span class="tl-title">Atención al cliente</span>
+                            <span class="tl-place">Perfumerías Primor · Goya, Madrid</span>
+                        </button>
+                        <div class="tl-body"><p>Gestión de cobros, pedidos y resolución de problemas con clientes en tienda.</p></div>
+                    </li>
 
-                        <span>Atención al cliente</span>
-                        <span>HTML</span>
-                        <span>CSS</span>
-                        <span>JS</span>
-                        <span>Inglés medio</span>
-                        <span>Adeje, Tenerife</span>
+                    <li class="tl-item" data-type="work">
+                        <button class="tl-head" aria-expanded="false">
+                            <span class="tl-date">Mar 2022 — Ene 2023</span>
+                            <span class="tl-title">Operario de restaurante</span>
+                            <span class="tl-place">Burger King · Collado Villalba</span>
+                        </button>
+                        <div class="tl-body"><p>Servicio rápido, trabajo en equipo y atención directa al público.</p></div>
+                    </li>
 
-                    </div>
+                    <li class="tl-item" data-type="study">
+                        <button class="tl-head" aria-expanded="false">
+                            <span class="tl-date">Sep 2015 — Jul 2019</span>
+                            <span class="tl-title">Graduado en ESO</span>
+                            <span class="tl-place">IES María Guerrero · Collado Villalba</span>
+                        </button>
+                        <div class="tl-body"><p>Educación Secundaria Obligatoria.</p></div>
+                    </li>
 
+                    <li class="tl-item" data-type="work">
+                        <button class="tl-head" aria-expanded="false">
+                            <span class="tl-date">2019</span>
+                            <span class="tl-title">Ayudante de limpieza</span>
+                            <span class="tl-place">Sersinor · Collado Villalba</span>
+                        </button>
+                        <div class="tl-body"><p>Limpieza de portales y urbanizaciones. Constancia y responsabilidad.</p></div>
+                    </li>
+
+                    <li class="tl-item" data-type="work">
+                        <button class="tl-head" aria-expanded="false">
+                            <span class="tl-date">2018 — 2021</span>
+                            <span class="tl-title">Auxiliar en fiestas de cumpleaños</span>
+                            <span class="tl-place">Mi primer trabajo</span>
+                        </button>
+                        <div class="tl-body"><p>Donde empezó todo: tratar con familias, organizar y hacer que la gente se lo pase bien.</p></div>
+                    </li>
+
+                </ol>
+
+                <div class="cv-actions reveal">
+                    <a href="cv.html" class="btn btn-yellow" data-cursor="Abrir">CV completo</a>
+                    <a href="cv%202025.pdf" class="btn btn-ghost" download data-cursor="Bajar">Descargar PDF</a>
                 </div>
 
             </div>
@@ -158,305 +372,174 @@
 
 
         <!-- =========================
-             STACK
+             03 · QUÉ ESTOY CONSTRUYENDO
         ========================== -->
 
-        <section class="skills-section section">
+        <section class="chapter" id="construyendo">
 
-            <div class="section-number reveal">02 / LO QUE VOY CONSTRUYENDO</div>
+            <header class="chapter-head container">
+                <p class="chapter-num reveal">Capítulo 03</p>
+                <h2 class="chapter-title reveal">Qué estoy <em>construyendo</em>.</h2>
+                <p class="chapter-lead reveal">Proyectos pequeños, hechos desde cero, para aprender de verdad.</p>
+            </header>
 
-            <div class="skills-marquee">
+            <div class="projects container">
 
-                <span>HTML</span>
-                <i>✦</i>
-                <span>CSS</span>
-                <i>✦</i>
-                <span>JavaScript</span>
-                <i>✦</i>
-                <span>Diseño web</span>
-                <i>✦</i>
-                <span>Edición de vídeo</span>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             PROYECTOS
-        ========================== -->
-
-        <section class="projects section" id="proyectos">
-
-            <div class="projects-header">
-
-                <div class="section-number reveal">
-                    03 / PROYECTOS
-                </div>
-
-                <div class="projects-heading reveal">
-                    <h2>
-                        Mis primeros<br>
-                        <span>pasos.</span>
-                    </h2>
-
-                    <p>
-                        Cada uno construido desde cero,
-                        aprendiendo sobre la marcha.
-                    </p>
-                </div>
-
-            </div>
-
-
-            <div class="projects-grid">
-
-                <!-- PROYECTO PRINCIPAL -->
-
-                <article class="project project-featured tilt-card reveal">
-
-                    <div class="project-number">01</div>
-
-                    <div class="project-visual visual-main">
-
-                        <div class="visual-window">
-
-                            <div class="window-top">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                            </div>
-
-                            <div class="window-content">
-
-                                <div class="mini-title">
-                                    MARIO IGLESIAS
-                                </div>
-
-                                <div class="mini-line large"></div>
-                                <div class="mini-line"></div>
-                                <div class="mini-line short"></div>
-
-                                <div class="mini-circle"></div>
-
-                            </div>
-
-                        </div>
-
+                <a href="#inicio" class="project p-web reveal" data-tilt data-cursor="Estás aquí">
+                    <span class="project-num">01</span>
+                    <div>
+                        <h3>Esta web</h3>
+                        <p>Mi pequeño universo, diseñado y programado por mí.</p>
                     </div>
+                    <span class="project-tags">HTML · CSS · JS</span>
+                </a>
 
-                    <div class="project-info">
-
-                        <div>
-                            <span class="project-label">
-                                Proyecto principal
-                            </span>
-
-                            <h3>Mi primera web</h3>
-
-                            <p>
-                                Esta misma página: diseñada y construida
-                                con HTML y CSS, para aprender a programar
-                                desde cero y tener un sitio donde ir
-                                mostrando lo siguiente.
-                            </p>
-                        </div>
-
-                        <div class="project-footer">
-
-                            <div class="project-tags">
-                                <span>HTML</span>
-                                <span>CSS</span>
-                                <span>Diseño</span>
-                            </div>
-
-                            <a href="#inicio" class="project-link">
-                                Estás en ella
-                                <span>↗</span>
-                            </a>
-
-                        </div>
-
+                <a href="tareas.html" class="project p-tasks reveal" data-tilt data-cursor="Abrir">
+                    <span class="project-num">02</span>
+                    <div>
+                        <h3>Lista de tareas</h3>
+                        <p>Añade, completa y borra tareas. Se guardan en el navegador.</p>
                     </div>
+                    <span class="project-tags">JavaScript</span>
+                </a>
 
-                </article>
-
-
-                <!-- PROYECTO 2 -->
-
-                <article class="project project-small tilt-card reveal delay-1">
-
-                    <div class="project-top">
-                        <span>02</span>
-                        <span>JavaScript</span>
-                    </div>
-
-                    <div class="task-visual">
-
-                        <div class="task-check checked">✓</div>
-                        <span>Mi lista de tareas</span>
-
-                        <div class="task-check checked">✓</div>
-                        <span>Aprender JavaScript</span>
-
-                        <div class="task-check">○</div>
-                        <span>Crear nuevo proyecto</span>
-
-                    </div>
-
-                    <div class="project-info">
-
-                        <h3>Mi lista de tareas</h3>
-
-                        <p>
-                            Una aplicación que añade, guarda, completa
-                            y borra tareas, con todo guardado en el navegador.
-                        </p>
-
-                        <a href="tareas.html" class="project-link">
-                            Abrir la lista <span>↗</span>
-                        </a>
-
-                    </div>
-
-                </article>
-
-
-                <!-- PROYECTO 3 -->
-
-                <article class="project project-process tilt-card reveal delay-2">
-
-                    <div class="project-top">
-                        <span>03</span>
-                        <span>En camino</span>
-                    </div>
-
-                    <div class="process-visual">
-
-                        <div class="process-orbit"></div>
-
-                        <div class="process-center">
-                            03
-                        </div>
-
-                    </div>
-
-                    <div class="project-info">
-
-                        <h3>Edición de vídeo</h3>
-
-                        <p>
-                            Mi siguiente objetivo: crear y editar mi primer
-                            vídeo corto, aprendiendo la herramienta desde cero.
-                        </p>
-
-                        <div class="process-status">
-                            <span></span>
-                            Estado: en proceso
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-                <!-- PROYECTO 4 -->
-
-                <article class="project project-dashboard tilt-card reveal">
-
-                    <div class="dashboard-preview">
-
-                        <div class="dashboard-preview-header">
-                            <span>MI PANEL</span>
-                            <span>2026</span>
-                        </div>
-
-                        <div class="dashboard-preview-main">
-
-                            <div class="preview-stat">
-                                <strong>3/4</strong>
-                                <small>Proyectos</small>
-                            </div>
-
-                            <div class="preview-progress">
-                                <div></div>
-                            </div>
-
-                        </div>
-
-                        <div class="preview-calendar">
-
-                            <span>01</span>
-                            <span>02</span>
-                            <span>03</span>
-                            <span class="today">04</span>
-                            <span>05</span>
-                            <span>06</span>
-                            <span>07</span>
-
-                        </div>
-
-                    </div>
-
-                    <div class="project-info">
-
-                        <div class="project-top">
-                            <span>04</span>
-                            <span>Dashboard</span>
-                        </div>
-
+                <a href="dashboard.html" class="project p-panel reveal" data-tilt data-cursor="Abrir">
+                    <span class="project-num">03</span>
+                    <div>
                         <h3>Mi panel</h3>
-
-                        <p>
-                            Un resumen visual de todo mi progreso,
-                            estilo panel de control, con mis proyectos
-                            y accesos rápidos.
-                        </p>
-
-                        <a href="dashboard.html" class="project-link">
-                            Ver mi panel <span>↗</span>
-                        </a>
-
+                        <p>Un resumen visual de mi progreso, estilo panel de control.</p>
                     </div>
+                    <span class="project-tags">Dashboard</span>
+                </a>
 
-                </article>
+                <a href="crear-cv.html" class="project p-cv reveal" data-tilt data-cursor="Probar">
+                    <span class="project-num">04</span>
+                    <div>
+                        <h3>Creador de CV</h3>
+                        <p>Una herramienta para montar un currículum en minutos.</p>
+                    </div>
+                    <span class="project-tags">Formularios</span>
+                </a>
 
+                <div class="project p-next reveal">
+                    <span class="project-num">05</span>
+                    <div>
+                        <h3>Edición de vídeo</h3>
+                        <p>Mi próximo reto: crear y editar mi primer vídeo corto.</p>
+                    </div>
+                    <span class="project-tags"><i class="pulse"></i> En proceso</span>
+                </div>
+
+            </div>
+
+            <div class="learning container">
+                <h3 class="reveal">Aprendiendo ahora</h3>
+                <ul class="meters">
+                    <li class="reveal" style="--v:.7"><span>HTML</span><div class="meter"><div></div></div></li>
+                    <li class="reveal" style="--v:.6"><span>CSS</span><div class="meter"><div></div></div></li>
+                    <li class="reveal" style="--v:.35"><span>JavaScript</span><div class="meter"><div></div></div></li>
+                    <li class="reveal" style="--v:.4"><span>Git y GitHub</span><div class="meter"><div></div></div></li>
+                    <li class="reveal" style="--v:.15"><span>Edición de vídeo</span><div class="meter"><div></div></div></li>
+                </ul>
             </div>
 
         </section>
 
 
         <!-- =========================
-             CV
+             AGENDA UNA CITA
         ========================== -->
 
-        <section class="cv-section section" id="cv">
+        <section class="booking" id="cita">
 
-            <div class="cv-line reveal"></div>
+            <div class="container booking-grid">
 
-            <div class="cv-layout">
-
-                <div class="section-number reveal">
-                    04 / MI RECORRIDO
+                <div class="booking-intro">
+                    <p class="chapter-num reveal">Agenda</p>
+                    <h2 class="chapter-title reveal">Hablemos de tu <em>web</em>.</h2>
+                    <p class="chapter-lead reveal">
+                        Elige el día y la hora que mejor te vengan. Son 30 minutos
+                        para hablar de tu idea, sin compromiso.
+                    </p>
+                    <ul class="booking-points reveal">
+                        <li>30 minutos</li>
+                        <li>Por teléfono o videollamada</li>
+                        <li>Hora de Canarias</li>
+                    </ul>
                 </div>
 
-                <div class="cv-content reveal">
+                <div class="booking-card reveal">
 
-                    <div class="cv-big">
-                        Formación,<br>
-                        <span>habilidades</span><br>
-                        y camino.
+                    <form id="bookingForm" novalidate>
+
+                        <div class="field">
+                            <label for="bName">Nombre</label>
+                            <input id="bName" name="name" autocomplete="name" required minlength="2" maxlength="80">
+                        </div>
+
+                        <div class="field-row">
+                            <div class="field">
+                                <label for="bEmail">Email</label>
+                                <input id="bEmail" name="email" type="email" autocomplete="email" required maxlength="120">
+                            </div>
+                            <div class="field">
+                                <label for="bPhone">Teléfono <small>(opcional)</small></label>
+                                <input id="bPhone" name="phone" type="tel" autocomplete="tel" maxlength="30">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label for="bTopic">¿De qué quieres hablar? <small>(opcional)</small></label>
+                            <textarea id="bTopic" name="topic" rows="3" maxlength="500" placeholder="Por ejemplo: quiero una web para mi restaurante"></textarea>
+                        </div>
+
+                        <div class="field">
+                            <span class="label" id="pickerLabel">Día y hora</span>
+
+                            <div class="picker" id="picker">
+                                <button type="button" class="picker-toggle" id="pickerToggle" aria-expanded="false" aria-controls="pickerPanel" aria-labelledby="pickerLabel pickerValue">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M3 10h18M8 3v4M16 3v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                                    <span class="picker-value" id="pickerValue">Elige día y hora</span>
+                                    <span class="picker-chevron" aria-hidden="true"></span>
+                                </button>
+
+                                <div class="picker-panel" id="pickerPanel">
+                                    <div class="picker-inner">
+                                        <div class="cal-head">
+                                            <button type="button" class="cal-nav" id="calPrev" aria-label="Mes anterior">‹</button>
+                                            <strong id="calTitle" aria-live="polite"></strong>
+                                            <button type="button" class="cal-nav" id="calNext" aria-label="Mes siguiente">›</button>
+                                        </div>
+                                        <div class="cal-week" aria-hidden="true">
+                                            <span>L</span><span>M</span><span>X</span><span>J</span><span>V</span><span>S</span><span>D</span>
+                                        </div>
+                                        <div class="cal-grid" id="calGrid"></div>
+                                        <div class="slots-wrap">
+                                            <p class="slots-title" id="slotsTitle">Elige uno de los días marcados.</p>
+                                            <div class="slots" id="slots" role="group" aria-labelledby="slotsTitle"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <label class="consent">
+                            <input type="checkbox" id="bConsent" required>
+                            <span>Acepto que Mario use estos datos solo para contactarme sobre esta cita.</span>
+                        </label>
+
+                        <button class="btn btn-forest" type="submit" id="bSubmit">Reservar cita</button>
+
+                        <p class="form-status" id="bStatus" role="status" aria-live="polite"></p>
+
+                    </form>
+
+                    <div class="booking-done" id="bookingDone" hidden>
+                        <div class="done-check" aria-hidden="true">✓</div>
+                        <h3>¡Cita reservada!</h3>
+                        <p id="doneText"></p>
+                        <button type="button" class="btn btn-ghost-dark" id="bookAnother">Reservar otra</button>
                     </div>
-
-                    <p>
-                        Formación, habilidades y todo lo que voy aprendiendo,
-                        organizado como portfolio.
-                    </p>
-
-                    <a href="cv.html" class="magnetic-button outline-button">
-                        <span>Ver CV completo</span>
-                        <span>↗</span>
-                    </a>
 
                 </div>
 
@@ -469,45 +552,19 @@
              CONTACTO
         ========================== -->
 
-        <section class="contact section" id="contacto">
+        <section class="contact" id="contacto">
 
-            <div class="contact-background"></div>
-
-            <div class="contact-content">
-
-                <div class="section-number reveal">
-                    05 / CONTACTO
-                </div>
-
-                <h2 class="reveal">
-                    ¿Hablamos<span>?</span>
-                </h2>
-
-                <p class="reveal delay-1">
+            <div class="container">
+                <p class="chapter-num reveal">Epílogo</p>
+                <h2 class="contact-title reveal">¿Hablamos<em>?</em></h2>
+                <p class="contact-lead reveal">
                     Estoy abierto a nuevas oportunidades y a conocer gente
-                    con la que aprender. Escríbeme cuando quieras.
+                    con la que aprender.
                 </p>
-
-                <a
-                    href="mailto:mariete431@icloud.com"
-                    class="contact-email reveal delay-2"
-                >
-                    mariete431@icloud.com
-                    <span>↗</span>
-                </a>
-
-                <div class="contact-social reveal delay-3">
-
-                    <a
-                        href="https://www.instagram.com/Whsmario/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        Instagram ↗
-                    </a>
-
+                <div class="hero-actions reveal">
+                    <a href="mailto:mariete431@icloud.com" class="btn btn-yellow" data-cursor="Escribir">mariete431@icloud.com</a>
+                    <a href="https://www.instagram.com/Whsmario/" class="btn btn-ghost" target="_blank" rel="noopener noreferrer" data-cursor="Seguir">Instagram ↗</a>
                 </div>
-
             </div>
 
         </section>
@@ -515,45 +572,25 @@
     </main>
 
 
-    <!-- FOOTER -->
-
     <footer class="footer">
-
-        <div>
-            MARIO IGLESIAS
+        <div class="container footer-inner">
+            <span>Mario Iglesias · Hecho paso a paso en Tenerife.</span>
+            <span class="hint">🐾 Psst… a alguien de esta web le gusta que escriban su nombre.</span>
+            <span>© <span id="year">2026</span> · <a href="admin.html" class="footer-admin">Panel</a></span>
         </div>
-
-        <div>
-            Hecho paso a paso.
-        </div>
-
-        <div>
-            © 2026
-        </div>
-
     </footer>
 
 
+    <!-- Easter egg: Brownie aparece -->
+    <div class="egg" id="egg" aria-live="polite">
+        <svg class="egg-dog" viewBox="0 0 160 120" aria-hidden="true"><use href="#brownie"/></svg>
+        <p class="egg-toast">¡Guau! Has encontrado a <b>Brownie</b> 🐾</p>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supa.js"></script>
     <script src="script.js"></script>
-    <script>
-      // Menú móvil (nuevo, no depende de script.js)
-      (function () {
-        var toggle = document.getElementById("navToggle");
-        var links = document.getElementById("navLinks");
-        if (!toggle || !links) return;
-        toggle.addEventListener("click", function () {
-          var isOpen = links.classList.toggle("open");
-          toggle.classList.toggle("open", isOpen);
-          toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
-        });
-        links.querySelectorAll("a").forEach(function (a) {
-          a.addEventListener("click", function () {
-            links.classList.remove("open");
-            toggle.classList.remove("open");
-            toggle.setAttribute("aria-expanded", "false");
-          });
-        });
-      })();
-    </script>
+    <script src="cita.js"></script>
 </body>
 </html>

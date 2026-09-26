@@ -81,10 +81,80 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function saveDayData(data) {
+        // Con sesión de administrador se guarda en Supabase, no aquí
+        if (cloud) return;
         localStorage.setItem(CAL_STORAGE_KEY, JSON.stringify(data));
     }
 
     let dayData = loadDayData();
+
+
+    /* ---------------------------------
+       Nube (Supabase): si has entrado en el panel privado
+       (admin.html), colores y recordatorios se guardan en tu
+       base de datos y los ves desde cualquier dispositivo.
+    --------------------------------- */
+
+    let cloud = false;
+
+    async function initCloud() {
+
+        if (!window.sbIsAdmin || !(await window.sbIsAdmin())) return;
+
+        const [days, rems] = await Promise.all([
+            sb.from("calendar_days").select("day, color"),
+            sb.from("reminders").select("id, day, text").order("created_at")
+        ]);
+
+        if (days.error || rems.error) return;
+
+        const local = dayData;
+        const next = {};
+
+        days.data.forEach((d) => {
+            next[d.day] = { color: d.color, events: [] };
+        });
+
+        rems.data.forEach((r) => {
+            if (!next[r.day]) next[r.day] = { color: null, events: [] };
+            next[r.day].events.push({ id: r.id, text: r.text });
+        });
+
+        cloud = true;
+        dayData = next;
+
+        const badge = document.createElement("span");
+        badge.textContent = "☁ Guardado en tu cuenta";
+        badge.style.cssText = "display:inline-block;margin-left:10px;padding:2px 10px;border-radius:999px;background:#f4e99b;color:#10291f;font-size:12px;font-weight:600;vertical-align:middle;";
+        selectedDate.after(badge);
+
+        // Si lo tenías guardado solo en este navegador, ofrece subirlo
+        const hasLocal = Object.values(local).some((d) => d.color || (d.events && d.events.length));
+
+        if (hasLocal && !days.data.length && !rems.data.length &&
+            confirm("Tienes recordatorios guardados solo en este navegador. ¿Quieres subirlos a tu cuenta?")) {
+
+            const colorRows = Object.entries(local)
+                .filter(([, d]) => d.color)
+                .map(([day, d]) => ({ day, color: d.color }));
+
+            const reminderRows = Object.entries(local)
+                .flatMap(([day, d]) => (d.events || []).map((e) => ({ day, text: e.text })));
+
+            if (colorRows.length) await sb.from("calendar_days").upsert(colorRows);
+            if (reminderRows.length) await sb.from("reminders").insert(reminderRows);
+
+            cloud = false;
+            badge.remove();
+            return initCloud();
+        }
+
+        renderCalendar();
+    }
+
+    function cloudError() {
+        alert("No se ha podido guardar en tu cuenta. Revisa la conexión e inténtalo otra vez.");
+    }
 
     function keyFor(date) {
         return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
@@ -414,6 +484,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 dayData[key].color =
                     dayData[key].color === color.id ? null : color.id;
 
+                if (cloud) {
+                    const newColor = dayData[key].color;
+                    (newColor
+                        ? sb.from("calendar_days").upsert({ day: key, color: newColor })
+                        : sb.from("calendar_days").delete().eq("day", key)
+                    ).then(({ error }) => { if (error) cloudError(); });
+                }
+
                 saveDayData(dayData);
                 renderCalendar();
             });
@@ -471,6 +549,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
             li.querySelector(".ev-delete").addEventListener("click", () => {
 
+                if (cloud) {
+                    sb.from("reminders").delete().eq("id", event.id)
+                        .then(({ error }) => { if (error) cloudError(); });
+                }
+
                 dayData[key].events =
                     dayData[key].events.filter((e) => e.id !== event.id);
 
@@ -485,7 +568,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (dayEventForm) {
 
-        dayEventForm.addEventListener("submit", (event) => {
+        dayEventForm.addEventListener("submit", async (event) => {
 
             event.preventDefault();
 
@@ -495,12 +578,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const key = keyFor(selected);
 
+            let id = Date.now().toString();
+
+            if (cloud) {
+                const { data, error } = await sb.from("reminders")
+                    .insert({ day: key, text })
+                    .select("id")
+                    .single();
+
+                if (error) return cloudError();
+
+                id = data.id;
+            }
+
             if (!dayData[key]) {
                 dayData[key] = { color: null, events: [] };
             }
 
             dayData[key].events.push({
-                id: Date.now().toString(),
+                id,
                 text
             });
 
@@ -515,6 +611,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     renderCalendar();
+
+    initCloud();
 
 
     /* =================================
