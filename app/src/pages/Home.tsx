@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Booking } from "@/components/Booking";
 import { CountUp, EditorialMarquee, Entrance, HeroTitle, Magnetic, ProfileParallax, ProjectPreview, Reveal } from "@/components/EditorialEffects";
 import { usePageTitle } from "@/components/SiteChrome";
+import { Testimonials } from "@/components/Testimonials";
 import { asset } from "@/lib/supabase";
 import { bookingClient, capitalize, dayKey } from "@/lib/appointments";
 
@@ -155,7 +156,9 @@ export default function Home() {
       })}</div></div></section>
 
 
-      <section id="contacto" className="contact-section section-pad"><div className="section-wrap"><Reveal><div className="section-heading"><span className="eyebrow">06 / CONTACTO</span><span className="section-rule" /></div><p className="contact-lead">PARA TODO LO DEMÁS</p><h2>Hablemos<span>.</span></h2><a className="contact-email" href="mailto:mariete431@icloud.com">mariete431@icloud.com <ArrowUpRight strokeWidth={1.2} /></a><div className="contact-links"><a href="https://www.instagram.com/Whsmario/" target="_blank" rel="noopener noreferrer">Instagram <ArrowUpRight size={16} /></a><a href="#reservar">Reservar una reunión <ArrowUpRight size={16} /></a></div></Reveal></div></section>
+      <Testimonials label="06 / OPINIONES" />
+
+      <section id="contacto" className="contact-section section-pad"><div className="section-wrap"><Reveal><div className="section-heading"><span className="eyebrow">07 / CONTACTO</span><span className="section-rule" /></div><p className="contact-lead">PARA TODO LO DEMÁS</p><h2>Hablemos<span>.</span></h2><a className="contact-email" href="mailto:mariete431@icloud.com">mariete431@icloud.com <ArrowUpRight strokeWidth={1.2} /></a><div className="contact-links"><a href="https://www.instagram.com/Whsmario/" target="_blank" rel="noopener noreferrer">Instagram <ArrowUpRight size={16} /></a><a href="#reservar">Reservar una reunión <ArrowUpRight size={16} /></a></div></Reveal></div></section>
     </main>
   </>;
 }

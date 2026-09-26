@@ -233,7 +233,7 @@ export default function PanelPage() {
       <Reveal><Planner /></Reveal>
     </div></section>
 
-    <section className="reserve-section section-pad"><div className="section-wrap">
+    <section id="visitantes" className="reserve-section section-pad"><div className="section-wrap">
       <SectionHeading label="04 / VISITANTES" />
       <Reveal><div className="intro-row"><h2>Deja una<br /><em>nota.</em></h2><p>Si has pasado por aquí, puedes dejarme un comentario.</p></div></Reveal>
       <Guestbook />
