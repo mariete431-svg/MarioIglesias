@@ -1,7 +1,7 @@
-import { supabase } from "@/lib/supabase";
+import { publicClient } from "@/lib/supabase";
 
 // Funciones públicas de reserva en la base de datos de Mario.
-export const bookingClient = supabase;
+export const bookingClient = publicClient;
 
 export const ZONE = "Atlantic/Canary";
 export const dayKey = (date: Date) => new Intl.DateTimeFormat("en-CA", {

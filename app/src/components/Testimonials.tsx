@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Reveal, useMotionPreference } from "@/components/EditorialEffects";
-import { supabase } from "@/lib/supabase";
+import { publicClient } from "@/lib/supabase";
 
 type Comment = { id: number; name: string; message: string; created_at: string };
 const fmtDate = new Intl.DateTimeFormat("es-ES", { day: "numeric", month: "long", year: "numeric", timeZone: "Atlantic/Canary" });
@@ -17,7 +17,7 @@ export function Testimonials({ label }: { label: string }) {
   const [paused, setPaused] = useState(false);
 
   useEffect(() => {
-    supabase.from("comments").select("id, name, message, created_at").order("created_at", { ascending: false }).limit(12)
+    publicClient.from("comments").select("id, name, message, created_at").order("created_at", { ascending: false }).limit(12)
       .then(({ data, error }) => setComments(!error && data ? data : []));
   }, []);
 
